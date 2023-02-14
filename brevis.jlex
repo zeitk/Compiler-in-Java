@@ -61,7 +61,7 @@ WHITESPACE=   [\040\t]
 LETTER=		[a-zA-z]
 QUOTE=		[\"]
 COMMENT=	[#"//"]
-STRINGTEXT=   (\\\"|[^\\\"]|\\t|\\\\|\\n|\\')*
+STRINGTEXT=   (\\\"|[^\\\n\"]|\\t|\\\\|\\n|\\')*
 
 #STRINGTEXT=   	([^\"{BADESCAPECHAR}])*
 BADESCAPECHAR= 	([^nt'\\\"?])
@@ -318,7 +318,7 @@ return {
             CharNum.num += yytext().length(); 
             return S;
           }
-\"{STRINGTEXT}
+\"{STRINGTEXT}$
           {
             ErrMsg.fatal(yyline+1, CharNum.num,
                           "ignoring unterminated string literal");
@@ -329,7 +329,7 @@ return {
                           "ignoring string literal with bad escaped character");
 	          CharNum.num += yytext().length();
           }
-\"({STRINGTEXT}|(\\{BADESCAPECHAR}))*
+\"(({STRINGTEXT}|(\\{BADESCAPECHAR}))*)$
           { ErrMsg.fatal(yyline+1, CharNum.num,
                         "ignoring unterminated string literal " +
                         "with bad escaped character");
