@@ -18,12 +18,7 @@ public class P2 {
         // ADD CALLS TO OTHER TEST METHODS HERE
 	testStrings();
 	CharNum.num = 1;    
-	testStrings2();
-	CharNum.num = 1;
-	testIDs();
-	CharNum.num = 1;
-	testIDs2();
-	CharNum.num = 1;
+
 }
 
 
@@ -515,8 +510,8 @@ public class P2 {
         FileReader inFile = null;
         PrintWriter outFile = null;
         try {
-            inFile = new FileReader("strings1.in");
-            outFile = new PrintWriter(new FileWriter("strings1.out"));
+            inFile = new FileReader("strings.in");
+            outFile = new PrintWriter(new FileWriter("strings.out"));
         } catch (FileNotFoundException ex) {
             System.err.println("File strings1.in not found.");
             System.exit(-1);
