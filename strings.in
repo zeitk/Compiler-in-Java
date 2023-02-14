@@ -1,3 +1,6 @@
 "Bad escape character \ "
-"Regular string"
-"Bad escape character unterm \p
+"Regular string" "Another String"
+"Unterminated string \"
+"Terminated string \\"
+"\\\"\'\t\n\?"
+
