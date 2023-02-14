@@ -61,7 +61,8 @@ WHITESPACE=   [\040\t]
 LETTER=		[a-zA-z]
 QUOTE=		[\"]
 COMMENT=	[#"//"]
-STRINGTEXT=   (\\\"|[^"//{BADESCAPECHAR}"\"]|\\t|\\\\|\\n|{WHITESPACE})*
+STRINGTEXT=   (\\\"|[^\\\"]|\\t|\\\\|\\n|\\')*
+
 #STRINGTEXT=   	([^\"{BADESCAPECHAR}])*
 BADESCAPECHAR= 	([^nt'\\\"?])
 
