@@ -61,12 +61,9 @@ WHITESPACE=   [\040\t]
 LETTER=		[a-zA-z]
 QUOTE=		[\"]
 COMMENT=	[#"//"]
-NOTQUOTE=	[^\"]
-BADESCAPECHAR=[^nt'\?\\] 
-NOTBACKSLASH= [^\]
-
-%state STRING_STATE
-%state BAD_ESCAPE_CHAR
+STRINGTEXT=   (\\\"|[^"//{BADESCAPECHAR}"\"]|\\t|\\\\|\\n|{WHITESPACE})*
+#STRINGTEXT=   	([^\"{BADESCAPECHAR}])*
+BADESCAPECHAR= 	([^nt'\\\"?])
 
 %implements java_cup.runtime.Scanner
 %function next_token
@@ -234,7 +231,7 @@ return {
         return S;
         }
 
-\\ { Symbol S = new Symbol(sym.NOT,new TokenVal(yyline+1, CharNum.num));
+\\  { Symbol S = new Symbol(sym.NOT,new TokenVal(yyline+1, CharNum.num));
         CharNum.num++;
         return S;
         }
@@ -293,7 +290,7 @@ return {
             return S;
           }
 
-{LETTER}({LETTER}|{DIGIT})* {
+({LETTER}|"_")({LETTER}|{DIGIT}|"_")* {
 		String val = yytext();
 		Symbol S = new Symbol(sym.ID,
 				new IdTokenVal(yyline+1, CharNum.num, val));
@@ -312,42 +309,31 @@ return {
             return S;
           }
 
-<YYINITIAL>{QUOTE} { yybegin(STRING_STATE); }
-
-<STRING_STATE>{QUOTE} {
-		String val = yytext();
-		Symbol S = new Symbol(sym.STRINGLITERAL,
-			new StrLitTokenVal(yyline+1, CharNum.num, val));
-		CharNum.num += yytext().length();
-		return S;
-		}
-
-<STRING_STATE>({NOTQUOTE}|\\{QUOTE})*$ {
-		ErrMsg.fatal(yyline+1, CharNum.num,
-			"ignoring unterminated string literal");
-		CharNum.num += yytext().length();
-		}
-
-<STRING_STATE>\\{BADESCAPECHAR} {
-	//Bad escape char
-	yybegin(BAD_ESCAPE_CHAR);
-	}
-
-<BAD_ESCAPE_CHAR>(.*{NOTBACKSLASH}{QUOTE})|{QUOTE}
-          { ErrMsg.fatal(yyline+1, CharNum.num,
-                        "ignoring string literal with bad escaped character");
-            yybegin(YYINITIAL);
-	    CharNum.num += yytext().length();
+\"{STRINGTEXT}\"
+	 {
+            String val = yytext();
+            Symbol S = new Symbol(sym.STRINGLITERAL,
+                          new StrLitTokenVal(yyline+1, CharNum.num, val));
+            CharNum.num += yytext().length(); 
+            return S;
           }
-
-<BAD_ESCAPE_CHAR>({NOTQUOTE}|\\{QUOTE})*$
+\"{STRINGTEXT}
+          {
+            ErrMsg.fatal(yyline+1, CharNum.num,
+                          "ignoring unterminated string literal");
+            CharNum.num += yytext().length();
+           }
+\"({STRINGTEXT}|(\\{BADESCAPECHAR}))*\"
+          { ErrMsg.fatal(yyline+1, CharNum.num,
+                          "ignoring string literal with bad escaped character");
+	          CharNum.num += yytext().length();
+          }
+\"({STRINGTEXT}|(\\{BADESCAPECHAR}))*
           { ErrMsg.fatal(yyline+1, CharNum.num,
                         "ignoring unterminated string literal " +
                         "with bad escaped character");
-            yybegin(YYINITIAL);
-	        CharNum.num += yytext().length();
+	          CharNum.num += yytext().length();
           }
-
 .         { ErrMsg.fatal(yyline+1, CharNum.num,
                          "ignoring illegal character: " + yytext());
             CharNum.num++;

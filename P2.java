@@ -14,8 +14,649 @@ public class P2 {
         // test all tokens
         testAllTokens();
         CharNum.num = 1;
-    
+	    
         // ADD CALLS TO OTHER TEST METHODS HERE
+	testStrings();
+	CharNum.num = 1;    
+	testStrings2();
+	CharNum.num = 1;
+	testIDs();
+	CharNum.num = 1;
+	testIDs2();
+	CharNum.num = 1;
+}
+
+
+/**
+     * testIDs
+     *
+     * Open and read from file strings1.txt
+     * For each token read, write the corresponding string to strings1.out
+     * If the input file contains all tokens, one per line, we can verify
+     * correctness of the scanner by comparing the input and output files
+     * (e.g., using a 'diff' command).
+     */
+    private static void testIDs2() throws IOException {
+    	// open input and output files
+        FileReader inFile = null;
+        PrintWriter outFile = null;
+        try {
+            inFile = new FileReader("ids2.in");
+            outFile = new PrintWriter(new FileWriter("ids2.out"));
+        } catch (FileNotFoundException ex) {
+            System.err.println("File strings1.in not found.");
+            System.exit(-1);
+        } catch (IOException ex) {
+            System.err.println("strings1.out cannot be opened.");
+            System.exit(-1);
+        }
+
+        // create and call the scanner
+        Yylex scanner = new Yylex(inFile);
+        Symbol token = scanner.next_token();
+        while (token.sym != sym.EOF) {
+            switch (token.sym) {
+            case sym.BOOL:
+                outFile.println("boolean"); 
+                break;
+            case sym.INT:
+                outFile.println("integer");
+                break;
+            case sym.VOID:
+                outFile.println("void");
+                break;
+            case sym.RECORD:
+                outFile.println("record"); 
+                break;
+            case sym.IF:
+                outFile.println("if");
+                break;
+            case sym.ELSE:
+                outFile.println("else");
+                break;
+            case sym.WHILE:
+                outFile.println("while");
+                break;								
+            case sym.SCAN:
+                outFile.println("scan"); 
+                break;
+            case sym.PRINT:
+                outFile.println("print");
+                break;				
+            case sym.RETURN:
+                outFile.println("return");
+                break;
+            case sym.TRUE:
+                outFile.println("true"); 
+                break;
+            case sym.FALSE:
+                outFile.println("false"); 
+                break;
+            case sym.ID:
+                outFile.println(((IdTokenVal)token.value).idVal);
+                break;
+            case sym.INTLITERAL:  
+                outFile.println(((IntLitTokenVal)token.value).intVal);
+                break;
+            case sym.STRINGLITERAL: 
+                outFile.println(((StrLitTokenVal)token.value).strVal);
+                break;    
+            case sym.LCURLY:
+                outFile.println("{");
+                break;
+            case sym.RCURLY:
+                outFile.println("}");
+                break;
+            case sym.LPAREN:
+                outFile.println("(");
+                break;
+            case sym.RPAREN:
+                outFile.println(")");
+                break;
+            case sym.SEMICOLON:
+                outFile.println(";");
+                break;
+            case sym.COMMA:
+                outFile.println(",");
+                break;
+            case sym.DOT:
+                outFile.println(".");
+                break;
+            case sym.READ:
+                outFile.println("->");
+                break;	
+            case sym.WRITE:
+                outFile.println("<-");
+                break;			
+            case sym.PLUSPLUS:
+                outFile.println("++");
+                break;
+            case sym.MINUSMINUS:
+                outFile.println("--");
+                break;	
+            case sym.PLUS:
+                outFile.println("+");
+                break;
+            case sym.MINUS:
+                outFile.println("-");
+                break;
+            case sym.TIMES:
+                outFile.println("*");
+                break;
+            case sym.DIVIDE:
+                outFile.println("/");
+                break;
+            case sym.NOT:
+                outFile.println("\\");
+                break;
+            case sym.AND:
+                outFile.println("&&");
+                break;
+            case sym.OR:
+                outFile.println("||");
+                break;
+            case sym.EQUALS:
+                outFile.println("==");
+                break;
+            case sym.NOTEQUALS:
+                outFile.println("\\=");
+                break;
+            case sym.LESS:
+                outFile.println("<");
+                break;
+            case sym.GREATER:
+                outFile.println(">");
+                break;
+            case sym.LESSEQ:
+                outFile.println("<=");
+                break;
+            case sym.GREATEREQ:
+                outFile.println(">=");
+                break;
+            case sym.ASSIGN:
+                outFile.println("=");
+                break;
+            default:
+                outFile.println("UNKNOWN TOKEN");
+            } // end switch
+
+            token = scanner.next_token();
+        } // end while
+        outFile.close();
+    }
+
+/**
+     * testIDs
+     *
+     * Open and read from file strings1.txt
+     * For each token read, write the corresponding string to strings1.out
+     * If the input file contains all tokens, one per line, we can verify
+     * correctness of the scanner by comparing the input and output files
+     * (e.g., using a 'diff' command).
+     */
+    private static void testIDs() throws IOException {
+    	// open input and output files
+        FileReader inFile = null;
+        PrintWriter outFile = null;
+        try {
+            inFile = new FileReader("ids1.in");
+            outFile = new PrintWriter(new FileWriter("ids1.out"));
+        } catch (FileNotFoundException ex) {
+            System.err.println("File strings1.in not found.");
+            System.exit(-1);
+        } catch (IOException ex) {
+            System.err.println("strings1.out cannot be opened.");
+            System.exit(-1);
+        }
+
+        // create and call the scanner
+        Yylex scanner = new Yylex(inFile);
+        Symbol token = scanner.next_token();
+        while (token.sym != sym.EOF) {
+            switch (token.sym) {
+            case sym.BOOL:
+                outFile.println("boolean"); 
+                break;
+            case sym.INT:
+                outFile.println("integer");
+                break;
+            case sym.VOID:
+                outFile.println("void");
+                break;
+            case sym.RECORD:
+                outFile.println("record"); 
+                break;
+            case sym.IF:
+                outFile.println("if");
+                break;
+            case sym.ELSE:
+                outFile.println("else");
+                break;
+            case sym.WHILE:
+                outFile.println("while");
+                break;								
+            case sym.SCAN:
+                outFile.println("scan"); 
+                break;
+            case sym.PRINT:
+                outFile.println("print");
+                break;				
+            case sym.RETURN:
+                outFile.println("return");
+                break;
+            case sym.TRUE:
+                outFile.println("true"); 
+                break;
+            case sym.FALSE:
+                outFile.println("false"); 
+                break;
+            case sym.ID:
+                outFile.println(((IdTokenVal)token.value).idVal);
+                break;
+            case sym.INTLITERAL:  
+                outFile.println(((IntLitTokenVal)token.value).intVal);
+                break;
+            case sym.STRINGLITERAL: 
+                outFile.println(((StrLitTokenVal)token.value).strVal);
+                break;    
+            case sym.LCURLY:
+                outFile.println("{");
+                break;
+            case sym.RCURLY:
+                outFile.println("}");
+                break;
+            case sym.LPAREN:
+                outFile.println("(");
+                break;
+            case sym.RPAREN:
+                outFile.println(")");
+                break;
+            case sym.SEMICOLON:
+                outFile.println(";");
+                break;
+            case sym.COMMA:
+                outFile.println(",");
+                break;
+            case sym.DOT:
+                outFile.println(".");
+                break;
+            case sym.READ:
+                outFile.println("->");
+                break;	
+            case sym.WRITE:
+                outFile.println("<-");
+                break;			
+            case sym.PLUSPLUS:
+                outFile.println("++");
+                break;
+            case sym.MINUSMINUS:
+                outFile.println("--");
+                break;	
+            case sym.PLUS:
+                outFile.println("+");
+                break;
+            case sym.MINUS:
+                outFile.println("-");
+                break;
+            case sym.TIMES:
+                outFile.println("*");
+                break;
+            case sym.DIVIDE:
+                outFile.println("/");
+                break;
+            case sym.NOT:
+                outFile.println("\\");
+                break;
+            case sym.AND:
+                outFile.println("&&");
+                break;
+            case sym.OR:
+                outFile.println("||");
+                break;
+            case sym.EQUALS:
+                outFile.println("==");
+                break;
+            case sym.NOTEQUALS:
+                outFile.println("\\=");
+                break;
+            case sym.LESS:
+                outFile.println("<");
+                break;
+            case sym.GREATER:
+                outFile.println(">");
+                break;
+            case sym.LESSEQ:
+                outFile.println("<=");
+                break;
+            case sym.GREATEREQ:
+                outFile.println(">=");
+                break;
+            case sym.ASSIGN:
+                outFile.println("=");
+                break;
+            default:
+                outFile.println("UNKNOWN TOKEN");
+            } // end switch
+
+            token = scanner.next_token();
+        } // end while
+        outFile.close();
+    }
+
+/**
+     * testStrings2
+     *
+     * Open and read from file strings1.txt
+     * For each token read, write the corresponding string to strings1.out
+     * If the input file contains all tokens, one per line, we can verify
+     * correctness of the scanner by comparing the input and output files
+     * (e.g., using a 'diff' command).
+     */
+    private static void testStrings2() throws IOException {
+    	// open input and output files
+        FileReader inFile = null;
+        PrintWriter outFile = null;
+        try {
+            inFile = new FileReader("strings2.in");
+            outFile = new PrintWriter(new FileWriter("strings2.out"));
+        } catch (FileNotFoundException ex) {
+            System.err.println("File strings1.in not found.");
+            System.exit(-1);
+        } catch (IOException ex) {
+            System.err.println("strings1.out cannot be opened.");
+            System.exit(-1);
+        }
+
+        // create and call the scanner
+        Yylex scanner = new Yylex(inFile);
+        Symbol token = scanner.next_token();
+        while (token.sym != sym.EOF) {
+            switch (token.sym) {
+            case sym.BOOL:
+                outFile.println("boolean"); 
+                break;
+            case sym.INT:
+                outFile.println("integer");
+                break;
+            case sym.VOID:
+                outFile.println("void");
+                break;
+            case sym.RECORD:
+                outFile.println("record"); 
+                break;
+            case sym.IF:
+                outFile.println("if");
+                break;
+            case sym.ELSE:
+                outFile.println("else");
+                break;
+            case sym.WHILE:
+                outFile.println("while");
+                break;								
+            case sym.SCAN:
+                outFile.println("scan"); 
+                break;
+            case sym.PRINT:
+                outFile.println("print");
+                break;				
+            case sym.RETURN:
+                outFile.println("return");
+                break;
+            case sym.TRUE:
+                outFile.println("true"); 
+                break;
+            case sym.FALSE:
+                outFile.println("false"); 
+                break;
+            case sym.ID:
+                outFile.println(((IdTokenVal)token.value).idVal);
+                break;
+            case sym.INTLITERAL:  
+                outFile.println(((IntLitTokenVal)token.value).intVal);
+                break;
+            case sym.STRINGLITERAL: 
+                outFile.println(((StrLitTokenVal)token.value).strVal);
+                break;    
+            case sym.LCURLY:
+                outFile.println("{");
+                break;
+            case sym.RCURLY:
+                outFile.println("}");
+                break;
+            case sym.LPAREN:
+                outFile.println("(");
+                break;
+            case sym.RPAREN:
+                outFile.println(")");
+                break;
+            case sym.SEMICOLON:
+                outFile.println(";");
+                break;
+            case sym.COMMA:
+                outFile.println(",");
+                break;
+            case sym.DOT:
+                outFile.println(".");
+                break;
+            case sym.READ:
+                outFile.println("->");
+                break;	
+            case sym.WRITE:
+                outFile.println("<-");
+                break;			
+            case sym.PLUSPLUS:
+                outFile.println("++");
+                break;
+            case sym.MINUSMINUS:
+                outFile.println("--");
+                break;	
+            case sym.PLUS:
+                outFile.println("+");
+                break;
+            case sym.MINUS:
+                outFile.println("-");
+                break;
+            case sym.TIMES:
+                outFile.println("*");
+                break;
+            case sym.DIVIDE:
+                outFile.println("/");
+                break;
+            case sym.NOT:
+                outFile.println("\\");
+                break;
+            case sym.AND:
+                outFile.println("&&");
+                break;
+            case sym.OR:
+                outFile.println("||");
+                break;
+            case sym.EQUALS:
+                outFile.println("==");
+                break;
+            case sym.NOTEQUALS:
+                outFile.println("\\=");
+                break;
+            case sym.LESS:
+                outFile.println("<");
+                break;
+            case sym.GREATER:
+                outFile.println(">");
+                break;
+            case sym.LESSEQ:
+                outFile.println("<=");
+                break;
+            case sym.GREATEREQ:
+                outFile.println(">=");
+                break;
+            case sym.ASSIGN:
+                outFile.println("=");
+                break;
+            default:
+                outFile.println("UNKNOWN TOKEN");
+            } // end switch
+
+            token = scanner.next_token();
+        } // end while
+        outFile.close();
+    }
+
+/**
+     * testStrings
+     *
+     * Open and read from file strings1.txt
+     * For each token read, write the corresponding string to strings1.out
+     * If the input file contains all tokens, one per line, we can verify
+     * correctness of the scanner by comparing the input and output files
+     * (e.g., using a 'diff' command).
+     */
+    private static void testStrings() throws IOException {
+    	// open input and output files
+        FileReader inFile = null;
+        PrintWriter outFile = null;
+        try {
+            inFile = new FileReader("strings1.in");
+            outFile = new PrintWriter(new FileWriter("strings1.out"));
+        } catch (FileNotFoundException ex) {
+            System.err.println("File strings1.in not found.");
+            System.exit(-1);
+        } catch (IOException ex) {
+            System.err.println("strings1.out cannot be opened.");
+            System.exit(-1);
+        }
+
+        // create and call the scanner
+        Yylex scanner = new Yylex(inFile);
+        Symbol token = scanner.next_token();
+        while (token.sym != sym.EOF) {
+            switch (token.sym) {
+            case sym.BOOL:
+                outFile.println("boolean"); 
+                break;
+            case sym.INT:
+                outFile.println("integer");
+                break;
+            case sym.VOID:
+                outFile.println("void");
+                break;
+            case sym.RECORD:
+                outFile.println("record"); 
+                break;
+            case sym.IF:
+                outFile.println("if");
+                break;
+            case sym.ELSE:
+                outFile.println("else");
+                break;
+            case sym.WHILE:
+                outFile.println("while");
+                break;								
+            case sym.SCAN:
+                outFile.println("scan"); 
+                break;
+            case sym.PRINT:
+                outFile.println("print");
+                break;				
+            case sym.RETURN:
+                outFile.println("return");
+                break;
+            case sym.TRUE:
+                outFile.println("true"); 
+                break;
+            case sym.FALSE:
+                outFile.println("false"); 
+                break;
+            case sym.ID:
+                outFile.println(((IdTokenVal)token.value).idVal);
+                break;
+            case sym.INTLITERAL:  
+                outFile.println(((IntLitTokenVal)token.value).intVal);
+                break;
+            case sym.STRINGLITERAL: 
+                outFile.println(((StrLitTokenVal)token.value).strVal);
+                break;    
+            case sym.LCURLY:
+                outFile.println("{");
+                break;
+            case sym.RCURLY:
+                outFile.println("}");
+                break;
+            case sym.LPAREN:
+                outFile.println("(");
+                break;
+            case sym.RPAREN:
+                outFile.println(")");
+                break;
+            case sym.SEMICOLON:
+                outFile.println(";");
+                break;
+            case sym.COMMA:
+                outFile.println(",");
+                break;
+            case sym.DOT:
+                outFile.println(".");
+                break;
+            case sym.READ:
+                outFile.println("->");
+                break;	
+            case sym.WRITE:
+                outFile.println("<-");
+                break;			
+            case sym.PLUSPLUS:
+                outFile.println("++");
+                break;
+            case sym.MINUSMINUS:
+                outFile.println("--");
+                break;	
+            case sym.PLUS:
+                outFile.println("+");
+                break;
+            case sym.MINUS:
+                outFile.println("-");
+                break;
+            case sym.TIMES:
+                outFile.println("*");
+                break;
+            case sym.DIVIDE:
+                outFile.println("/");
+                break;
+            case sym.NOT:
+                outFile.println("\\");
+                break;
+            case sym.AND:
+                outFile.println("&&");
+                break;
+            case sym.OR:
+                outFile.println("||");
+                break;
+            case sym.EQUALS:
+                outFile.println("==");
+                break;
+            case sym.NOTEQUALS:
+                outFile.println("\\=");
+                break;
+            case sym.LESS:
+                outFile.println("<");
+                break;
+            case sym.GREATER:
+                outFile.println(">");
+                break;
+            case sym.LESSEQ:
+                outFile.println("<=");
+                break;
+            case sym.GREATEREQ:
+                outFile.println(">=");
+                break;
+            case sym.ASSIGN:
+                outFile.println("=");
+                break;
+            default:
+                outFile.println("UNKNOWN TOKEN");
+            } // end switch
+
+            token = scanner.next_token();
+        } // end while
+        outFile.close();
     }
 
     /**
