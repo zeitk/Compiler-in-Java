@@ -17,11 +17,11 @@ public class P2 {
 		// test numeric
 
 		// test max numeric
-	//	runMaxIntegerTest("maxInteger");
-		CharNum.num = 1;
+	runMaxIntegerTest("maxInteger");
+	CharNum.num = 1;
 	    
         // test valid strings
-	//	runTest("strings");
+		runTest("strings");
 		CharNum.num = 1;
 			
 		// test invalid strings

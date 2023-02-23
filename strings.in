@@ -1,6 +1,4 @@
-"Bad escape character \ "
-"Regular string" "Another String"
-"Unterminated string \"
+"Regular string"
 "Terminated string \\"
-"\\\"\'\t\n\?"
-
+"Valid escape characters \\ \" \' \t \n \? "
+"Other symbols: \"void < > + return { } #hello"
