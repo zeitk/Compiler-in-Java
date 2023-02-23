@@ -11,11 +11,11 @@ import java_cup.runtime.*;  // defines Symbol
 public class P2 {
     public static void main(String[] args) throws IOException { // exception may be thrown by yylex
         // test all non-dynamic tokens
-        runTest("allTokens",1);
+        runTest("allTokens", true);
         CharNum.num = 1;
 
 		// test identifiers
-		runTest("ids",1);
+		runTest("ids", true);
 		CharNum.num = 1;
 
 		// test max numeric
@@ -23,7 +23,7 @@ public class P2 {
 		CharNum.num = 1;
 	    
         // test valid strings
-		runTest("strings",1);
+		runTest("strings", true);
 		CharNum.num = 1;
 			
 		// test invalid strings
@@ -31,7 +31,7 @@ public class P2 {
 		CharNum.num = 1;
 
 		// test multiple tokens per line
-		runTest("multi",0);
+		runTest("multi", false);
 		CharNum.num = 1;
 	}
 
@@ -43,7 +43,7 @@ public class P2 {
 	* correctness of the scanner by comparing the input and output files
 	* (e.g., using a 'diff' command).
 	*/
-	private static void runTest(String testName, bool checkCharIncrement) throws IOException {
+	private static void runTest(String testName, boolean checkCharIncrement) throws IOException {
 		// open input and output files
 		FileReader inFile = null;
 		PrintWriter outFile = null;
