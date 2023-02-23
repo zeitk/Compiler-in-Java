@@ -198,7 +198,7 @@ public class P2 {
 		} // end while
 		outFile.close();
 	}
-	private void runInvalidStringsTest(String testName) throws IOException{
+	private static void runInvalidStringsTest(String testName) throws IOException{
 		final PrintStream origErr = System.err;  // save original error stream
 		PrintStream outFile = null;   // output file you want error messages to go to
 
@@ -216,7 +216,7 @@ public class P2 {
 		outFile.close();         // close output file
 		System.setErr(origErr);  // set error stream back to original System.err
 	}
-	private void runMaxIntegerTest(String testName) throws IOException{
+	private static void runMaxIntegerTest(String testName) throws IOException{
 		// create and call the scanner
 		String tokenVal;
 		Yylex scanner = new Yylex(inFile);
