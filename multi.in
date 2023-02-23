@@ -1,0 +1,8 @@
+"String" #Comment
+1234"String test whitespace"
+1234 #Comment
+1234 Identifier
+1234 Identifier"String"#Comment
+void_Identifier1234
+"String" "Second string" _Identifier = 1234 #Comment
+#"Only a \0 comment" + _notidentifier = 1234
