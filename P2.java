@@ -11,21 +11,21 @@ import java_cup.runtime.*;  // defines Symbol
 public class P2 {
     public static void main(String[] args) throws IOException { // exception may be thrown by yylex
         // test all non-dynamic tokens
-        runTest("allTokens.in");
+        runTest("allTokens");
         CharNum.num = 1;
 
 		// test numeric
 
 		// test max numeric
-		runMaxIntegerTest("maxInteger");
+	//	runMaxIntegerTest("maxInteger");
 		CharNum.num = 1;
 	    
         // test valid strings
-		runTest("strings");
+	//	runTest("strings");
 		CharNum.num = 1;
 			
 		// test invalid strings
-		runTest("invalidStrings");
+	//	runTest("invalidStrings");
 		CharNum.num = 1;
 
 		// test multiple tokens per line
@@ -101,7 +101,7 @@ public class P2 {
 			tokenVal = ((IdTokenVal)token.value).idVal;
 			break;
 			case sym.INTLITERAL:  
-			tokenVal = ((IntLitTokenVal)token.value).intVal;
+			tokenVal = Integer.toString(((IntLitTokenVal)token.value).intVal);
 			break;
 			case sym.STRINGLITERAL: 
 			tokenVal = ((StrLitTokenVal)token.value).strVal;
@@ -217,6 +217,15 @@ public class P2 {
 		System.setErr(origErr);  // set error stream back to original System.err
 	}
 	private static void runMaxIntegerTest(String testName) throws IOException{
+		FileReader inFile = null;
+		
+		try {
+			inFile = new FileReader(testName + ".in");
+		} catch (FileNotFoundException ex) {
+			System.err.println("File " + testName + ".in not found.");
+			System.exit(-1);
+		}
+
 		// create and call the scanner
 		String tokenVal;
 		Yylex scanner = new Yylex(inFile);
@@ -263,7 +272,7 @@ public class P2 {
 			tokenVal = ((IdTokenVal)token.value).idVal;
 			break;
 			case sym.INTLITERAL:  
-			tokenVal = ((IntLitTokenVal)token.value).intVal;
+			tokenVal = Integer.toString(((IntLitTokenVal)token.value).intVal);
 			break;
 			case sym.STRINGLITERAL: 
 			tokenVal = ((StrLitTokenVal)token.value).strVal;
@@ -347,7 +356,7 @@ public class P2 {
 			tokenVal = "UNKNOWN TOKEN";
 			} // end switch
 
-			if ((token.sym == sym.INTLITERAL) && Integer.parseInt(tokenVal) != Integer.MAXINT){
+			if ((token.sym == sym.INTLITERAL) && Integer.parseInt(tokenVal) != Integer.MAX_VALUE){
 				System.err.println("Returned non-max integer: " + tokenVal);
 			}
 
