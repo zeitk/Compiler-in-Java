@@ -203,7 +203,7 @@ public class P2 {
 		PrintStream outFile = null;   // output file you want error messages to go to
 
 		try {
-			outFile = new PrintStream("<name of your output file>");
+			outFile = new PrintStream(testName + ".out");
 		} catch (FileNotFoundException ex) {
 			System.err.println("File ... cannot be opened.");
 			System.exit(-1);
