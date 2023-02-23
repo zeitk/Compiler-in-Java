@@ -193,7 +193,7 @@ private static void runTest(String testName) throws IOException {
 
 		//Else print out token value so diff succeeds
 		else{
-			outFile.println(tokenVal)
+			outFile.println(tokenVal);
 		}
 		token = scanner.next_token();
 	} // end while
