@@ -99,13 +99,13 @@ private static void runTest(String testName) throws IOException {
 		tokenVal = "false"; 
 		break;
 		case sym.ID:
-		tokenVal = ((IdTokenVal)token.value).idVal);
+		tokenVal = ((IdTokenVal)token.value).idVal;
 		break;
 		case sym.INTLITERAL:  
-		tokenVal = ((IntLitTokenVal)token.value).intVal);
+		tokenVal = ((IntLitTokenVal)token.value).intVal;
 		break;
 		case sym.STRINGLITERAL: 
-		tokenVal = ((StrLitTokenVal)token.value).strVal);
+		tokenVal = ((StrLitTokenVal)token.value).strVal;
 		break;    
 		case sym.LCURLY:
 		tokenVal = "{";
@@ -261,13 +261,13 @@ private void runMaxIntegerTest(String testName) throws IOException{
 		tokenVal = "false"; 
 		break;
 		case sym.ID:
-		tokenVal = ((IdTokenVal)token.value).idVal);
+		tokenVal = ((IdTokenVal)token.value).idVal;
 		break;
 		case sym.INTLITERAL:  
-		tokenVal = ((IntLitTokenVal)token.value).intVal);
+		tokenVal = ((IntLitTokenVal)token.value).intVal;
 		break;
 		case sym.STRINGLITERAL: 
-		tokenVal = ((StrLitTokenVal)token.value).strVal);
+		tokenVal = ((StrLitTokenVal)token.value).strVal;
 		break;    
 		case sym.LCURLY:
 		tokenVal = "{";
@@ -349,7 +349,7 @@ private void runMaxIntegerTest(String testName) throws IOException{
 		} // end switch
 
 		if ((token.sym == sym.INTLITERAL) && Integer.parseInt(tokenVal) != Integer.MAXINT){
-			System.err.println("Returned non-max integer: " + tokenVal)
+			System.err.println("Returned non-max integer: " + tokenVal);
 		}
 
 		token = scanner.next_token();
