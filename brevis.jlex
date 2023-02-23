@@ -1,3 +1,44 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Title:        	brevis.jlex   
+// Files:          	brevis.jlex
+// Semester:         	Spring 2023
+//
+// Author: 		Cory Sterner
+// Email: 		cdsterner@wisc.edu
+// CS Login:		sterner
+// Lecturer's Name:	Beck Hasti
+// Lab Section:   	
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+//                   CHECK ASSIGNMENT PAGE TO see IF PAIR-PROGRAMMING IS ALLOWED
+//                   If pair programming is allowed:
+//                   1. Read PAIR-PROGRAMMING policy  
+//                   2. choose a partner wisely
+//                   3. REGISTER THE TEAM BEFORE YOU WORK TOGETHER 
+//                      a. one partner creates the team
+//                      b. the other partner must join the team
+//                   4. complete this section for each program file.
+//
+// Pair Partner:     John Kellet 
+// Email:            jkellet@wisc.edu
+// CS Login:         kellett
+// Lecturer's Name:  Beck Hasti 
+// Lab Section:      (your partner's lab section number)
+//
+//////////////////// STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+//                   must fully acknowledge and credit those sources of help.
+//                   Instructors and TAs do not have to be credited here,
+//                   but tutors, roommates, relatives, strangers, etc do.
+//
+// Persons:          Identify persons by name, relationship to you, and email.
+//                   Describe in detail the the ideas and help they provided.
+//
+// Online sources:   avoid web searches to solve your problems, but if you do
+//                   search, be sure to include Web URLs and description of 
+//                   of any information you find.
+//////////////////////////// 80 columns wide //////////////////////////////////
 import java_cup.runtime.*; // defines the Symbol class
 
 // The generated scanner will return a Symbol for each token that it finds.
@@ -56,15 +97,13 @@ class CharNum {
 }
 %%
 
-DIGIT=        [0-9]
-WHITESPACE=   [\040\t]
-LETTER=		[a-zA-z]
-QUOTE=		[\"]
+DIGIT=          [0-9]
+WHITESPACE=     [\040\t]
+LETTER=		[a-zA-Z]
 COMMENT=	[#"//"]
-STRINGTEXT=   (\\\"|[^\\\n\"]|\\t|\\\\|\\n|\\')*
-
-#STRINGTEXT=   	([^\"{BADESCAPECHAR}])*
-BADESCAPECHAR= 	([^nt'\\\"?])
+STRINGTEXT=     (\\{ESCAPECHAR}|[^\\\n\"])*
+ESCAPECHAR =    [nt'\"?\\]
+BADESCAPECHAR= 	[^nt'\"?\\]
 
 %implements java_cup.runtime.Scanner
 %function next_token
@@ -285,7 +324,11 @@ return {
 {DIGIT}+  { // NOTE: the following computation of the integer value does
             //       NOT check for overflow. This must be changed.
             int val = Integer.parseInt(yytext());
-            Symbol S = new Symbol(sym.INTLITERAL,
+
+	    //If the value has overflowed set to max int
+            if (val < 0) val = Integer.MAX_VALUE; 
+	    
+	    Symbol S = new Symbol(sym.INTLITERAL,
                              new IntLitTokenVal(yyline+1, CharNum.num, val));
             CharNum.num += yytext().length();
             return S;
@@ -318,23 +361,26 @@ return {
             CharNum.num += yytext().length(); 
             return S;
           }
+
 \"{STRINGTEXT}$
           {
             ErrMsg.fatal(yyline+1, CharNum.num,
                           "ignoring unterminated string literal");
-            CharNum.num += yytext().length();
+	    CharNum.num = 1;
            }
 \"({STRINGTEXT}|(\\{BADESCAPECHAR}))*\"
           { ErrMsg.fatal(yyline+1, CharNum.num,
                           "ignoring string literal with bad escaped character");
 	          CharNum.num += yytext().length();
           }
+
 \"(({STRINGTEXT}|(\\{BADESCAPECHAR}))*)$
           { ErrMsg.fatal(yyline+1, CharNum.num,
                         "ignoring unterminated string literal " +
                         "with bad escaped character");
-	          CharNum.num += yytext().length();
+	    CharNum.num = 1;
           }
+
 .         { ErrMsg.fatal(yyline+1, CharNum.num,
                          "ignoring illegal character: " + yytext());
             CharNum.num++;
