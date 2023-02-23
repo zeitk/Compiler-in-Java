@@ -219,6 +219,10 @@ public class P2 {
 			if (token.sym != sym.STRINGLITERAL){
 				System.err.println("Error: Non-string token returned");
 			}
+			if (CharNum.num != 0){
+				System.err.println("Error: Character count not reset correctly")
+			}
+			token = scanner.next_token();
 		}
 
 		outFile.close();         // close output file
