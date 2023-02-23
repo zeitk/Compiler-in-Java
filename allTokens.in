@@ -35,3 +35,5 @@ return
 <=
 >=
 =
+98342
+#"This comment correctly shows up in diff, extra chars: 983 void \l \n \\  

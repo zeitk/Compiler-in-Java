@@ -15,6 +15,8 @@ public class P2 {
         CharNum.num = 1;
 
 		// test identifiers
+		runTest("ids");
+		CharNum.num = 1;
 
 		// test max numeric
 		runMaxIntegerTest("maxInteger");

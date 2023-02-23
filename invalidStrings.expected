@@ -1,13 +1,16 @@
-ignoring unterminated string literal
-ignoring unterminated string literal
-ignoring unterminated string literal
-ignoring unterminated string literal
-ignoring string literal with bad escaped character
-ignoring string literal with bad escaped character
-ignoring string literal with bad escaped character
-ignoring string literal with bad escaped character
-ignoring unterminated string literal with bad escaped character
-ignoring unterminated string literal with bad escaped character
-ignoring unterminated string literal with bad escaped character
-ignoring unterminated string literal with bad escaped character
-ignoring unterminated string literal with bad escaped character
+1:1 ****ERROR**** ignoring unterminated string literal
+2:1 ****ERROR**** ignoring unterminated string literal
+3:1 ****ERROR**** ignoring unterminated string literal
+4:1 ****ERROR**** ignoring unterminated string literal
+5:1 ****ERROR**** ignoring string literal with bad escaped character
+6:1 ****ERROR**** ignoring string literal with bad escaped character
+7:1 ****ERROR**** ignoring string literal with bad escaped character
+8:1 ****ERROR**** ignoring string literal with bad escaped character
+9:1 ****ERROR**** ignoring unterminated string literal with bad escaped character
+10:1 ****ERROR**** ignoring unterminated string literal with bad escaped character
+11:1 ****ERROR**** ignoring unterminated string literal with bad escaped character
+12:1 ****ERROR**** ignoring unterminated string literal with bad escaped character
+13:1 ****ERROR**** ignoring unterminated string literal with bad escaped character
+Error: Non-string token returned
+Error: Character count not reset correctly
+14:11 ****ERROR**** ignoring unterminated string literal
