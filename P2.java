@@ -1,3 +1,44 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Title:        	P2.java   
+// Files:          	P2.java
+// Semester:        Spring 2023
+//
+// Author: 			Cory Sterner
+// Email: 			cdsterner@wisc.edu
+// CS Login:		sterner
+// Lecturer's Name:	Beck Hasti
+// Lab Section:   	
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+//                   CHECK ASSIGNMENT PAGE TO see IF PAIR-PROGRAMMING IS ALLOWED
+//                   If pair programming is allowed:
+//                   1. Read PAIR-PROGRAMMING policy  
+//                   2. choose a partner wisely
+//                   3. REGISTER THE TEAM BEFORE YOU WORK TOGETHER 
+//                      a. one partner creates the team
+//                      b. the other partner must join the team
+//                   4. complete this section for each program file.
+//
+// Pair Partner:     
+// Email:            
+// CS Login:         
+// Lecturer's Name:   
+// Lab Section:      (your partner's lab section number)
+//
+//////////////////// STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+//                   must fully acknowledge and credit those sources of help.
+//                   Instructors and TAs do not have to be credited here,
+//                   but tutors, roommates, relatives, strangers, etc do.
+//
+// Persons:          Identify persons by name, relationship to you, and email.
+//                   Describe in detail the the ideas and help they provided.
+//
+// Online sources:   avoid web searches to solve your problems, but if you do
+//                   search, be sure to include Web URLs and description of 
+//                   of any information you find.
+//////////////////////////// 80 columns wide //////////////////////////////////
 import java.util.*;
 import java.io.*;
 import java_cup.runtime.*;  // defines Symbol
@@ -42,6 +83,9 @@ public class P2 {
 	* If the input file contains all tokens, one per line, we can verify
 	* correctness of the scanner by comparing the input and output files
 	* (e.g., using a 'diff' command).
+	* 
+	* testname: the name of the test to be used for the file input and output names
+	* checkCharIncrement: determines whether the driver will test the character increment or not
 	*/
 	private static void runTest(String testName, boolean checkCharIncrement) throws IOException {
 		// open input and output files
@@ -201,6 +245,15 @@ public class P2 {
 		} // end while
 		outFile.close();
 	}
+	/* Driver for invalid strings test cases
+	* 
+	* Will open the file and write the errors to 
+	* the specified output file. That output file
+	* can then be diffed with an expected error output
+	* file to ensure errors are logged correctly
+	* 
+	* testName: name of the test used for the input and output file names
+	*/
 	private static void runInvalidStringsTest(String testName) throws IOException{
 		final PrintStream origErr = System.err;  // save original error stream
 		PrintStream outFile = null;   // output file you want error messages to go to
@@ -238,6 +291,15 @@ public class P2 {
 		outFile.close();         // close output file
 		System.setErr(origErr);  // set error stream back to original System.err
 	}
+	/* Driver for testing that integers over the maximum are
+	*  handled appropriately
+	* 
+	* Opens a file of integers that are equal to or over the 
+	* java maximum integer. Prints an error if they are not parsed
+	* by the scanner as Integer.MAX_VALUE. Ignores all non-integer tokens.
+	*
+	* testName: the name used for the input file
+	*/
 	private static void runMaxIntegerTest(String testName) throws IOException{
 		FileReader inFile = null;
 		
