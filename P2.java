@@ -25,7 +25,7 @@ public class P2 {
 		CharNum.num = 1;
 			
 		// test invalid strings
-		runTest("invalidStrings")
+		runTest("invalidStrings");
 		CharNum.num = 1;
 
 		// test multiple tokens per line
