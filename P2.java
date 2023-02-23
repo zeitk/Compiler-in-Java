@@ -204,6 +204,7 @@ public class P2 {
 		FileReader inFile = null;
 
 		try {
+			inFile = new FileReader(testName + ".in");
 			outFile = new PrintStream(testName + ".out");
 		} catch (FileNotFoundException ex) {
 			System.err.println("File ... cannot be opened.");
