@@ -17,7 +17,7 @@ public class P2 {
 		// test numeric
 
 		// test max numeric
-		runtMaxIntegerTest("maxInteger")
+		runMaxIntegerTest("maxInteger");
 		CharNum.num = 1;
 	    
         // test valid strings
@@ -217,7 +217,7 @@ private void runInvalidStringsTest(String testName) throws IOException{
 	outFile.close();         // close output file
 	System.setErr(origErr);  // set error stream back to original System.err
 }
-private void runtMaxIntegerTest(String testName) throws IOException{
+private void runMaxIntegerTest(String testName) throws IOException{
 	// create and call the scanner
 	String tokenVal;
 	Yylex scanner = new Yylex(inFile);
