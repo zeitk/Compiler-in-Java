@@ -11,11 +11,11 @@ import java_cup.runtime.*;  // defines Symbol
 public class P2 {
     public static void main(String[] args) throws IOException { // exception may be thrown by yylex
         // test all non-dynamic tokens
-        runTest("allTokens");
+        runTest("allTokens",1);
         CharNum.num = 1;
 
 		// test identifiers
-		runTest("ids");
+		runTest("ids",1);
 		CharNum.num = 1;
 
 		// test max numeric
@@ -23,7 +23,7 @@ public class P2 {
 		CharNum.num = 1;
 	    
         // test valid strings
-		runTest("strings");
+		runTest("strings",1);
 		CharNum.num = 1;
 			
 		// test invalid strings
@@ -31,7 +31,7 @@ public class P2 {
 		CharNum.num = 1;
 
 		// test multiple tokens per line
-		runTest("multi");
+		runTest("multi",0);
 		CharNum.num = 1;
 	}
 
@@ -43,7 +43,7 @@ public class P2 {
 	* correctness of the scanner by comparing the input and output files
 	* (e.g., using a 'diff' command).
 	*/
-	private static void runTest(String testName) throws IOException {
+	private static void runTest(String testName, bool checkCharIncrement) throws IOException {
 		// open input and output files
 		FileReader inFile = null;
 		PrintWriter outFile = null;
@@ -189,7 +189,7 @@ public class P2 {
 			} // end switch
 
 			//Check that the character length is correct and print error if not
-			if (CharNum.num != tokenVal.length() + 1) {
+			if (checkCharIncrement && (CharNum.num != tokenVal.length() + 1)) {
 				outFile.println("Invalid character incrementation for token: " + tokenVal);
 			}
 
