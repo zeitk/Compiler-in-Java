@@ -14,18 +14,18 @@ public class P2 {
         runTest("allTokens");
         CharNum.num = 1;
 
-		// test numeric
+		// test identifiers
 
 		// test max numeric
-	runMaxIntegerTest("maxInteger");
-	CharNum.num = 1;
+		runMaxIntegerTest("maxInteger");
+		CharNum.num = 1;
 	    
         // test valid strings
 		runTest("strings");
 		CharNum.num = 1;
 			
 		// test invalid strings
-	//	runTest("invalidStrings");
+		runTest("invalidStrings");
 		CharNum.num = 1;
 
 		// test multiple tokens per line
@@ -211,7 +211,15 @@ public class P2 {
 
 		System.setErr(outFile);  // set the error stream to the output file
 
-		// your testing code 
+		// create and call the scanner
+		String tokenVal;
+		Yylex scanner = new Yylex(inFile);
+		Symbol token = scanner.next_token();
+		while (token.sym != sym.EOF) { 
+			if (token.sym != sym.STRINGLITERAL){
+				System.err.println("Error: Non-string token returned");
+			}
+		}
 
 		outFile.close();         // close output file
 		System.setErr(origErr);  // set error stream back to original System.err
