@@ -201,11 +201,15 @@ public class P2 {
 	private static void runInvalidStringsTest(String testName) throws IOException{
 		final PrintStream origErr = System.err;  // save original error stream
 		PrintStream outFile = null;   // output file you want error messages to go to
+		FileReader inFile = null;
 
 		try {
 			outFile = new PrintStream(testName + ".out");
 		} catch (FileNotFoundException ex) {
 			System.err.println("File ... cannot be opened.");
+			System.exit(-1);
+		} catch (IOException ex) {
+			System.err.println(testName + ".out cannot be opened.");
 			System.exit(-1);
 		}
 
