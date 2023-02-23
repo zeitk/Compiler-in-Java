@@ -204,13 +204,15 @@ public class P2 {
 		FileReader inFile = null;
 
 		try {
-			inFile = new FileReader(testName + ".in");
 			outFile = new PrintStream(testName + ".out");
 		} catch (FileNotFoundException ex) {
-			System.err.println("File ... cannot be opened.");
-			System.exit(-1);
-		} catch (IOException ex) {
 			System.err.println(testName + ".out cannot be opened.");
+			System.exit(-1);
+		} 
+		try {
+			inFile = new FileReader(testName + ".in");
+		} catch (IOException ex) {
+			System.err.println(testName + ".in cannot be opened.");
 			System.exit(-1);
 		}
 
