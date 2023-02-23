@@ -31,7 +31,8 @@ public class P2 {
 		CharNum.num = 1;
 
 		// test multiple tokens per line
-
+		runTest("multi");
+		CharNum.num = 1;
 	}
 
 	/* Main driver function for running tests

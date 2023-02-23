@@ -40,6 +40,7 @@ test:
 	diff ids.in ids.out
 	diff strings.in strings.out
 	diff invalidStrings.expected invalidStrings.out
+	diff multi.expected multi.out
 	diff allTokens.in allTokens.out
 
 ###
