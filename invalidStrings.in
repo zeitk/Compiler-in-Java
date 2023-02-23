@@ -1,0 +1,14 @@
+"Unterminated string
+"
+"Unterminated string \"
+"Unterminated \\ string \"
+"Bad escape \\ character \ "
+"Bad escape \l  character"
+"\d Bad escape character \""
+"\q"
+"Unterminated and bad escape character \p 
+"Unterminated \" \ and bad escape character \"
+"\! Unterminated and bad escape character
+"\ 
+"Unterminated and bad escape character \\ \" \u
+identifier"
