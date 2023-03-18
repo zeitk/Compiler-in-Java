@@ -90,6 +90,8 @@ non terminal StmtNode	      stmt;
 non terminal AssignExpNode    assignExp;
 non terminal ExpNode	      exp;
 non terminal ExpNode	      term;
+non terminal CallExpNode      fncall;
+non terminal LinkedList       actualList;
 non terminal TypeNode         type;
 non terminal ExpNode	      loc;
 non terminal IdNode           id;
@@ -224,6 +226,13 @@ stmt		::= assignExp:a SEMICOLON
 		{: RESULT = new IfStmtNode(e, new DeclListNode(v), 
 							new StmtListNode(s));
 		:}
+		| IF LPAREN exp:e RPAREN LCURLY varDeclList:v1 stmtList:s1 RCURLY ELSE LCURLY varDeclList:v2 stmtList:s2 RCURLY
+		{: RESULT = new IfElseStmtNode(e, new DeclListNode(v1),
+				new StmtListNode(s1), new DeclListNode(v2), new StmtListNode(s2));
+		:}
+		| fncall:f SEMICOLON
+		{: RESULT = new CallStmtNode(f);
+		:}
 		;
 
 assignExp	::= loc:l ASSIGN exp:e
@@ -256,6 +265,28 @@ term		::= loc:l
 		:}
 		| LPAREN exp:e RPAREN
 		{: RESULT = e;
+		:}
+		| fncall:f
+		{: RESULT = f;
+		:}
+		;
+
+fncall		::= id:i LPAREN RPAREN
+		{: RESULT = new CallExpNode(i);
+		:}
+		| id:i LPAREN actualList:a RPAREN
+		{: RESULT = new CallExpNode(i, new ExpListNode(a));
+		:}
+		;
+
+actualList	::= exp:e
+		{: LinkedList<ExpNode> l = new LinkedList<ExpNode>();
+		   l.addLast(e);
+		   RESULT = l;
+		:}
+		| actualList:a COMMA exp:e
+		{: a.addLast(e);
+		   RESULT = a;
 		:}
 		;
 
