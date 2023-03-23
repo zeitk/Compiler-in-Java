@@ -777,7 +777,7 @@ class NotNode extends UnaryExpNode {
 
     public void unparse(PrintWriter p, int indent) {
 	doIndent(p, indent);
-	p.print("!");
+	p.print("\\");
 	myExp.unparse(p, 0);
     }
 }
