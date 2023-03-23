@@ -253,7 +253,7 @@ stmt		::= assignExp:a SEMICOLON
 		{: RESULT = new ReturnStmtNode(e);
 		:}
 		| RETURN SEMICOLON
-		{: RESULT = new ReturnStmtNode();
+		{: RESULT = new ReturnStmtNode(null);
 		:} 	
 		;
 
