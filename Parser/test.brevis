@@ -6,11 +6,14 @@ boolean jayjay22222222()
 {
 	ted = brenden;
 	lol = lal;
+	steve = crotchet();
+	if (hammarabi(false, a = b, 123, "steven")) {}
 	lol--;
 	if (lol) {}
 }
 boolean test123(integer x) {}
 integer whoaLord(boolean xavier, void salamander, integer bongo) {
+	forward = gandalf((true), hammarabi(false, a = b, 123, "steven"));
 	if (123) {
 		integer z;
 		a.b--;
@@ -32,3 +35,61 @@ void super(integer bimbop, void cool)
 }
 record Point(integer x;);
 record Incredible(boolean zed; record Point point; integer why;);
+
+void one;
+integer two;
+boolean three;
+void bigTest(integer uno, void dos, boolean tres) {
+	record Point point;
+	integer bigBoi;
+	boolean something;
+	void thatthing;
+	
+	x = y;
+	x = z - y;
+	x.y++;
+	x++;
+	x--;
+	x.y--;
+	
+	if (false) {
+		void blooper;
+		record Point point;
+		ted.x.y.z.ted--;
+	}
+	else {
+		void blooper;
+		record Point point;
+		ted.x.y.z.ted--;
+	}
+	
+	while (a + b = c + d) {
+		void blooper;
+		x.y++;
+		x = y;
+		if (true) {}
+		else {}
+	}
+
+	scan -> x;
+	scan -> x.y.z;
+	print <- x;
+	print <- y = z;
+	print <- (x * y);
+	print <- "Several";
+	print <- 1999;
+	print <- bigTest(uno, dos, tres);
+	print <- x.y.z;
+	smallTest();
+	mediumTest((a+x),"OOOOOF",1\=2,-"Heaven");	
+	bigTest(\Me, 123, tres,-smallTest(),mediumTest(-smallTest()));
+	return (x == b);
+	return (y \= z);
+	return (peso / dollar);
+	return (mexico > mexica);
+	return france >= francais;
+	return germany <= deutschland;
+	return \USA;
+	return (Me && You);
+	return;
+}	
