@@ -798,7 +798,7 @@ class PlusNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" + ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -813,7 +813,7 @@ class MinusNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" - ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -828,7 +828,7 @@ class TimesNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" * ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -843,7 +843,7 @@ class DivideNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" / ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -858,7 +858,7 @@ class EqualsNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" == ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -873,7 +873,7 @@ class NotEqualsNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" \\= ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -888,7 +888,7 @@ class LessNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" < ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -903,7 +903,7 @@ class LessEqNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" <= ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -918,7 +918,7 @@ class GreaterNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" > ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -933,7 +933,7 @@ class GreaterEqNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" >= ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -948,7 +948,7 @@ class AndNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" && ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
 
@@ -963,6 +963,6 @@ class OrNode extends BinaryExpNode {
 	    myExp1.unparse(p, 0);
 	    p.print(" || ");
 	    myExp2.unparse(p, 0);
-	    p.print(" ) ");
+	    p.print(")");
     }
 }
