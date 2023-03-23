@@ -576,6 +576,7 @@ class ReturnStmtNode extends StmtNode {
 
     public void unparse(PrintWriter p, int indent) {
 	doIndent(p, indent);
+	p.print("return ");
 	myExp.unparse(p, indent);
 	p.print(";");
     }
