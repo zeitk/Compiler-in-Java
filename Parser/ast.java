@@ -504,6 +504,15 @@ class WhileStmtNode extends StmtNode {
     }
 	
     public void unparse(PrintWriter p, int indent) {
+	doIndent(p, indent);
+	p.print("while (");
+	myExp.unparse(p, 0);
+	p.println(") {");
+	indent += 4;
+	myDeclList.unparse(p, indent);
+	myStmtList.unparse(p, indent);
+	doIndent(p, indent - 4);
+	p.println("}");
     }
 
     // three children
@@ -518,6 +527,11 @@ class ReadStmtNode extends StmtNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
+	doIndent(p, indent);
+	p.print("scan -> ");
+	myExp.unparse(p, 0);
+	p.print(";");
+	
     }
 
     // one child (actually can only be an IdNode or an ArrayExpNode)
@@ -530,6 +544,10 @@ class WriteStmtNode extends StmtNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
+	doIndent(p, indent);
+	p.print("print write ");
+	myExp.unparse(p, 0);
+	p.print(";");
     }
 
     // one child
@@ -542,6 +560,9 @@ class CallStmtNode extends StmtNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
+	doIndent(p, indent);
+	call.unparse(p, 0);
+	p.print(";");
     }
 
     // one child
