@@ -253,7 +253,7 @@ stmt		::= assignExp:a SEMICOLON
 		{: RESULT = new ReturnStmtNode(e);
 		:}
 		| RETURN SEMICOLON
-		{: System.out.println("return;");
+		{: RESULT = new ReturnStmtNode();
 		:} 	
 		;
 
