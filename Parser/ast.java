@@ -1,5 +1,32 @@
 import java.io.*;
 import java.util.*;
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Title:            ast.java
+// Files:            ast.java
+// Semester:         CS 536 Spring 2023
+//
+// Author:           John Kellett
+// Email:            jkellett@wisc.edu
+// CS Login:         kellett
+// Lecturer's Name:  Beck Hasti
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+//                   CHECK ASSIGNMENT PAGE TO see IF PAIR-PROGRAMMING IS ALLOWED
+//                   If pair programming is allowed:
+//                   1. Read PAIR-PROGRAMMING policy (in cs302 policy) 
+//                   2. choose a partner wisely
+//                   3. REGISTER THE TEAM BEFORE YOU WORK TOGETHER 
+//                      a. one partner creates the team
+//                      b. the other partner must join the team
+//                   4. complete this section for each program file.
+//
+// Pair Partner:     Cory Sterner
+// Email:            cdsterner@wisc.edu
+// CS Login:         sterner
+// Lecturer's Name:  Beck Hasti
+//
 
 // **********************************************************************
 // The ASTnode class defines the nodes of the abstract-syntax tree that
@@ -708,11 +735,9 @@ class AssignExpNode extends ExpNode {
 
     public void unparse(PrintWriter p, int indent) {
     	doIndent(p, indent);
-    	p.print("(");
 	myLhs.unparse(p, 0);
 	p.print(" = ");
 	myExp.unparse(p, 0);
-	p.print(")");
     }
 
     // two children

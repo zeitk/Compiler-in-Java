@@ -70,7 +70,8 @@ void bigTest(integer uno, void dos, boolean tres) {
 		if (true) {}
 		else {}
 	}
-
+	x = x + y * z / "Zeit" + (8 - g);
+	y = (x + y) - (z - (2 + 3) - (4 - 5));
 	scan -> x;
 	scan -> x.y.z;
 	print <- x;
