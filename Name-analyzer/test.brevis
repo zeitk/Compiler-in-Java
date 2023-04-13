@@ -1,0 +1,35 @@
+boolean e(integer x, boolean b) {
+    integer a;
+    boolean c;
+    integer y;
+}
+integer y;
+integer f(integer x, boolean b) {
+    integer a;
+    boolean c;
+    a(a + 3, b);
+    if (b) {
+	integer z;
+        b = y;
+        z = a;
+    }
+}
+void g() {
+    integer a;
+    boolean b;
+    integer y;
+    y = 6;
+    b = a == 3;
+    f(a + y*2, b);
+    g();
+    if (b) {
+	integer a;
+	boolean b;
+        e(y,b);    
+    }
+    else {
+	integer a;
+	boolean b;
+        f(a + 2*y, b);
+    }
+}
