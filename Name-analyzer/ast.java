@@ -833,9 +833,11 @@ class IdNode extends ExpNode {
     public String getName() {
     	return(myStrVal);
     }
-    
+   
+    //overloaded analysis method for net new declarations 
     public void analysis(SymTab table, String type) {
-    	
+    	//create a new Sym and place it in the table, throwing an error
+	//if it already exists in our scope
 	Sym S = new Sym(type);
 	try {
 		table.addDecl(myStrVal, S);
@@ -844,14 +846,15 @@ class IdNode extends ExpNode {
 				"Identifier multiply-declared");
 	} catch (SymTabEmptyException ex) {
 		ErrMsg.warn(myLineNum, myCharNum,
-				"Couldn't add decl");
+				"Empty SymTab");
 	}
 	mySym = S;
 	isDecl = true;
     }
-
-    //should do something about this at some point
-    public void analysis(SymTab table) {	
+    
+    //method to find an existing Sym
+    public void analysis(SymTab table) {
+        //find the nearest Sym and thrown an error if none exists	    
     	try {
 		Sym S = table.lookupGlobal(myStrVal);
     		if (S == null) {
@@ -859,7 +862,6 @@ class IdNode extends ExpNode {
 					"Identifier undeclared");
 			ErrMsg.setAbort();
 		}
-		//S.setDecl(false);
 		mySym = S;
 		isDecl = false;
 	} catch(SymTabEmptyException ex) {}

@@ -1,0 +1,16 @@
+integer f(integer x, boolean b) {}
+integer y; 
+void y;  
+void g() {
+    integer a; 
+    integer y;
+    boolean y;
+    void y;
+    f(a, b);
+    t();
+    y = 3;
+    z = 3;
+    b = a == 3;
+    f(a + y*2, b);
+    g();
+}
