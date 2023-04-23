@@ -1,0 +1,45 @@
+boolean e(integer x, boolean b) {
+    integer a;
+    boolean c;
+    integer y;
+    return(c);
+    return;
+}
+record Point (
+	integer x;
+	integer y;
+);
+void a(integer b, boolean c) {
+        integer x;
+        record Point t;
+        print <- t;
+        print <- Point;
+        print <- e;
+        a(b, x);
+        return x;
+}
+integer y;
+integer f(integer x, boolean b) {
+    integer p;
+    boolean c;
+    boolean z;
+    record Point t;
+    scan -> a;
+    scan -> Point;
+    scan -> t;
+    print <- a(p,c);
+    z();
+    a(p, b);
+    e(x, b);
+    return c;
+}
+void g() {
+    integer a;
+    boolean b;
+    integer y;
+    f(a, b);
+    g();
+    f(a,b,y);
+    return;
+}
+

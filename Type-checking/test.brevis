@@ -1,0 +1,27 @@
+boolean e(integer x, boolean b) {
+    integer a;
+    boolean c;
+    integer y;
+    return(c);
+}
+void a(integer b, boolean c) {
+	integer x;
+	print <- e(x,c);
+	a(b, c);
+	return;
+}
+integer y;
+integer f(integer x, boolean b) {
+    integer p;
+    boolean c;
+    boolean z;
+    a(p, b);
+    e(x, b);
+}
+void g() {
+    integer a;
+    boolean b;
+    integer y;
+    f(a, b);
+    g();
+}
