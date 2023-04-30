@@ -1,45 +1,106 @@
-boolean e(integer x, boolean b) {
-    integer a;
-    boolean c;
-    integer y;
-    return(c);
-    return;
-}
-record Point (
-	integer x;
-	integer y;
-);
-void a(integer b, boolean c) {
-        integer x;
-        record Point t;
-        print <- t;
-        print <- Point;
-        print <- e;
-        a(b, x);
-        return x;
-}
-integer y;
-integer f(integer x, boolean b) {
-    integer p;
-    boolean c;
-    boolean z;
-    record Point t;
-    scan -> a;
-    scan -> Point;
-    scan -> t;
-    print <- a(p,c);
-    z();
-    a(p, b);
-    e(x, b);
-    return c;
-}
-void g() {
-    integer a;
-    boolean b;
-    integer y;
-    f(a, b);
-    g();
-    f(a,b,y);
-    return;
+boolean bbb;
+record R ( integer a; );
+record R q;
+
+void f(integer p1, boolean p2) {
 }
 
+void func1(){}
+void func2(){}
+
+
+record RecName1( 
+        integer a;
+);
+
+record RecName2(
+        integer b;
+);
+
+
+record RecName1 rec1;
+record RecName2 rec2;
+
+integer int;
+boolean bool;
+
+void main() {
+    integer aaa;
+
+    // some errors involving illegal operations on functions
+    aaa = f + f;
+    bbb = f == 3;
+    bbb = f > main;
+    bbb = f == f;
+
+    // some errors involving bad function calls 
+    aaa();
+    f();
+    f(5);
+    f(aaa, aaa);
+    f(q, q.a);
+    R();
+
+    // some errors involving records 
+    q = 5;
+    q = q;
+    scan -> R;
+    q = true || 3;
+    bbb = R && q.a;
+
+    // error involving return
+    return 10;
+
+    // other type errors 
+    aaa = aaa + (\false);
+    aaa = aaa + "foo";
+    bbb = aaa;
+
+    // don't give too many or too few error messages here 
+    bbb = (aaa + true) && (bbb < true);
+    
+    // Errors involving functions    
+    bool = func1() == func2();
+    bool = func1 == func2;
+
+    // Errors involving arithmetic operators 
+    int = bool * int;
+    int = int * bool;
+    bool = int * int;
+    bool++;
+
+    // Errors involving relational operators
+    bool = int < bool;
+    bool = bool < int;
+    int = int > int;
+
+    //Errors involving logical operators
+    bool = int && bool;
+    bool = bool && int;
+    int = bool && bool;
+
+    // Errors involving if statements
+    if (int){
+	int++;
+    } 
+
+    if ((int > 1) && bool && int){ 
+	bbb = (aaa + true) && (bbb < true);
+    }
+
+
+    // Errors involving while statements
+    while (int / int){
+
+    }
+
+    // Shoul only log one type mismatch error
+    bool = int == true;
+    if (bool == int){
+
+    }
+    int = true;
+
+    // Two arithmetic operator errors
+    int = (int + bool) + bool;
+}
