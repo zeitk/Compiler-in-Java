@@ -990,7 +990,7 @@ class IfStmtNode extends StmtNode {
 	Type expType = myExp.typeCheck();
 	Type stmtType = myStmtList.typeCheck();
 
-	if (expType.isErrorType() || stmtType.isErrorType()){
+	if (expType.isErrorType()){
 		return (new ErrorType());
 	}
 	
@@ -1057,8 +1057,7 @@ class IfElseStmtNode extends StmtNode {
         Type thenStmtType = myThenStmtList.typeCheck();
 	Type elseStmtType = myElseStmtList.typeCheck();
 
-        if (expType.isErrorType() || elseStmtType.isErrorType()
-			|| thenStmtType.isErrorType()){
+        if (expType.isErrorType()){ 
                 return (new ErrorType());
         }
 
@@ -1141,7 +1140,7 @@ class WhileStmtNode extends StmtNode {
         Type expType = myExp.typeCheck();
         Type smtType = myStmtList.typeCheck();
 
-        if (expType.isErrorType() || smtType.isErrorType()){
+        if (expType.isErrorType()){
                 return (new ErrorType());
         }
 
