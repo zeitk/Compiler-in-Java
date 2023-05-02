@@ -55,3 +55,42 @@ integer x() {
 	f(a*b*c+3+3*b, y);
 	return 1;
 }
+
+integer int;
+boolean bool;
+boolean h(){
+        bool = e(int,bool);
+        bool = (e(int,bool) && bool);
+	bool = ((e(int,bool) && e(int,bool)) || e(int,bool))
+        bool = ((int > y) || bool);
+        bool = \e(int,bool);
+	int = f(int,bool);
+        if (bool && (int <= y)){
+                return (bool && e(int,bool) && (int >= y));
+        }
+        else {
+            return bool;
+        }
+
+        while (int == y){
+		int ++;
+		int --;
+                return (int \= y);
+        }
+	
+	while (e(int,bool)){
+		int = y;
+	}
+	int = f(int,bool);
+	
+	while (int == f(int,bool)){
+	
+	}
+	
+	if (\bool){
+		int = -int;
+	}
+	
+	bool = (int > y) || (int < y) && \(int >= y) || (int <= y) && (bool \= e(int,bool));
+	return (bool);
+}
