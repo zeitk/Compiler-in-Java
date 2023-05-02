@@ -1737,7 +1737,7 @@ class AssignExpNode extends ExpNode {
     	Type t = myLhs.typeCheck();
 	Type rhsType = myExp.typeCheck();
 
-	if (myExp.typeCheck().isErrorType() || t.isErrorType()){
+	if (rhsType.isErrorType() || t.isErrorType()){
 		return (new ErrorType());
 	}
 	
@@ -1770,7 +1770,7 @@ class AssignExpNode extends ExpNode {
 		return(new ErrorType());
 	}
 			
-	return(myExp.typeCheck());
+	return(rhsType);
     }
 
     /***
