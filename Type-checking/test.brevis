@@ -1,3 +1,7 @@
+record Point (
+    integer x;
+    integer y;
+);
 boolean e(integer x, boolean b) {
     integer a;
     boolean c;
@@ -6,6 +10,14 @@ boolean e(integer x, boolean b) {
 }
 void a(integer b, boolean c) {
 	integer x;
+	record Point p;
+        print <- p.x;
+        print <- e(p.x, c);
+        print <- x;
+        print <- c;
+        print <- 1 + 2;
+	print <- true;
+        print <- "String";
 	print <- e(x,c);
 	a(b, c);
 	return;
@@ -15,8 +27,16 @@ integer f(integer x, boolean b) {
     integer p;
     boolean c;
     boolean z;
+    record Point pi;
     a(p, b);
-    e(x, b);
+    e(x, b); 
+    scan -> pi.x;
+    scan -> pi.y;
+    scan -> x;
+    scan -> p;
+    scan -> b;
+    scan -> f(p, b);
+    return(1 + p);
 }
 void g() {
     integer a;
@@ -24,4 +44,14 @@ void g() {
     integer y;
     f(a, b);
     g();
+    return;
+}
+integer x() {
+    integer a;
+	integer b;
+	integer c;
+	boolean y;
+	a = b = c;
+	f(a*b*c+3+3*b, y);
+	return 1;
 }

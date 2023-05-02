@@ -1332,12 +1332,12 @@ class ReturnStmtNode extends StmtNode {
 		}
 		return(fnType);
 	}
+	Type t = myExp.typeCheck();
 	if (fnType.isVoidType()) {
 		ErrMsg.fatal(myExp.lineNum(),myExp.charNum(),
 				"Return with a value in a void function");
 		return(new ErrorType());
 	}
-	Type t = myExp.typeCheck();
 	if (t.isErrorType()) {
 		return(t);
 	}
@@ -1818,8 +1818,6 @@ class CallExpNode extends ExpNode {
     public boolean checkVoid() {
     	FnSym S = (FnSym)myId.sym();
 	if (S == null) {
-		//TODO remove
-		System.out.print("Error in checkVoid");
 		return(true);
 	}
 	if (S.getReturnType().isVoidType()) {
@@ -1839,8 +1837,6 @@ class CallExpNode extends ExpNode {
 	}
 	FnSym S = (FnSym)myId.sym();
 	if (S == null) {
-		//TODO remove
-		System.out.println("Error in CallExpNode TypeCheck");
 	}
 	if (S.getNumParams() != myExpList.getNum()) {
 		ErrMsg.fatal(myId.lineNum(), myId.charNum(),
@@ -2321,7 +2317,8 @@ class EqualsNode extends BinaryExpNode {
         	}	
         
 		else if (myExp1 instanceof CallExpNode) {
-        		if(((CallExpNode)myExp1).checkVoid()) {
+			Type t = ((CallExpNode)myExp1).getReturnType();
+        		if(t.isVoidType()) {
                 		ErrMsg.fatal(myExp1.lineNum(),myExp1.charNum(),
                                	        "Equality operator applied to void function calls");
 				return(new ErrorType());
@@ -2402,7 +2399,8 @@ class NotEqualsNode extends BinaryExpNode {
         	}	
         
 		else if (myExp1 instanceof CallExpNode) {
-        		if(((CallExpNode)myExp1).checkVoid()) {
+			Type t = ((CallExpNode)myExp1).getReturnType();
+        		if(t.isVoidType()) {
                 		ErrMsg.fatal(myExp1.lineNum(),myExp1.charNum(),
                                	        "Equality operator applied to void function calls");
 				return(new ErrorType());
