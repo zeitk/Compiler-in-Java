@@ -989,15 +989,6 @@ class IfStmtNode extends StmtNode {
     public Type typeCheck() {
 	Type expType = myExp.typeCheck();
 	Type stmtType = myStmtList.typeCheck();
-	    
-	//Set Exp to the function return type if its a function
-        if (expType.isFnType()){
-               if (myExp instanceof CallExpNode) {
-                        CallExpNode fnCall = (CallExpNode) myExp;
-                        expType = fnCall.getReturnType();
-               }
-
-        }
 
 	if (expType.isErrorType()){
 		return (new ErrorType());
@@ -1065,15 +1056,6 @@ class IfElseStmtNode extends StmtNode {
         Type expType = myExp.typeCheck();
         Type thenStmtType = myThenStmtList.typeCheck();
 	Type elseStmtType = myElseStmtList.typeCheck();
-	    
-	//Set Exp to the function return type if its a function
-        if (expType.isFnType()){
-               if (myExp instanceof CallExpNode) {
-                        CallExpNode fnCall = (CallExpNode) myExp;
-                        expType = fnCall.getReturnType();
-               }
-
-        }
 
         if (expType.isErrorType()){ 
                 return (new ErrorType());
@@ -1157,15 +1139,6 @@ class WhileStmtNode extends StmtNode {
     public Type typeCheck() {
         Type expType = myExp.typeCheck();
         Type smtType = myStmtList.typeCheck();
-	    
-	//Set Exp to the function return type if its a function
-        if (expType.isFnType()){
-               if (myExp instanceof CallExpNode) {
-                        CallExpNode fnCall = (CallExpNode) myExp;
-                        expType = fnCall.getReturnType();
-               }
-
-        }
 
         if (expType.isErrorType()){
                 return (new ErrorType());
