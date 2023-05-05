@@ -1,0 +1,65 @@
+integer x;
+boolean y;
+void b() {
+        integer b;
+        b = 4;
+        print <- "We're now in void b()";
+        print <- "\n";
+        print <- b;
+        print <- "\n";
+}
+boolean a(boolean arg1, integer arg2) {
+	integer x;
+	boolean d;
+	d = false;
+	x = 5;
+	print <- "We're now in void a()";
+	print <- "\n";
+	if (arg1) {
+		b();
+	}
+	print <- x;
+	print <- "\n";
+	return(d);
+}
+integer c(boolean arg1, integer x, integer arg3) {
+	print <- "We're now in integer c()";
+	print <- "\n";
+	x = 7;
+	return(x);
+}
+void main() {
+	boolean b;
+	integer z;
+	b = true;
+	z = 3;
+	y = true;
+	x = 2;
+	if (true) {
+		print <- "True Main";
+		print <- "\n";
+	}
+	else {
+		print <- "False Main";
+		print <- "\n";
+	}
+	if (y) {
+                print <- y;
+                print <- "\n";
+        }
+	print <- x;
+	print <- "\n";
+	print <- z;
+	print <- "\n";
+	b = a(b,z);
+	print <- "Back to main. The next line should be a 0";
+	print <- "\n";
+	print <- b;
+	print <- "\n";
+	x = c(b,z,x);
+	print <- x;
+	print <- "\n";
+	x = 8;
+	print <- x;
+	print <- "\n";
+}
