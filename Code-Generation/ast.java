@@ -441,9 +441,10 @@ class VarDeclNode extends DeclNode {
     }
 
     public void codeGen() {
+	Codegen.generateWithComment("","VarDeclNode");
  	Sym S = myId.sym();
         if (S.isGlobal() == false) return;	
-	Codegen.generate(".data");
+	Codegen.generateWithComment(".data", "VarDeclNode");
 	Codegen.generate(".align 2");
 	Codegen.generateLabeled("_"+myId.name(),".space","",
 			" 4");
@@ -574,7 +575,7 @@ class FnDeclNode extends DeclNode {
     
     public void codeGen() {
 	
-	Codegen.generate(".text");
+	Codegen.generateWithComment(".text", "FnDeclNode");
 	
 	if (myId.isMain()) {
 		Codegen.generate(".globl main");
@@ -1151,6 +1152,7 @@ class IfElseStmtNode extends StmtNode {
     }
     
     public void codeGen() {
+	Codegen.generateWithComment("","IfElseStmtNode");
 	String L1 = Codegen.nextLabel();
 	String L2 = Codegen.nextLabel();
 
@@ -1247,6 +1249,7 @@ class WhileStmtNode extends StmtNode {
     }
     
     public void codeGen() {
+	Codegen.generateWithComment("","WhileStmtNode");
 	String L1 = Codegen.nextLabel();
     	String L2 = Codegen.nextLabel();
 	
@@ -1561,6 +1564,7 @@ class TrueNode extends ExpNode {
     }
 
     public void codeGen() {
+	Codegen.generateWithComment("","TrueNode");
         Codegen.generate("li",Codegen.T0,Codegen.TRUE);
         Codegen.genPush(Codegen.T0);
     }
@@ -1601,6 +1605,7 @@ class FalseNode extends ExpNode {
     }
 
     public void codeGen() {
+	Codegen.generateWithComment("","FalseNode");
    	Codegen.generate("li",Codegen.T0,Codegen.FALSE);
     	Codegen.genPush(Codegen.T0);	
     }
@@ -1642,6 +1647,7 @@ class IdNode extends ExpNode {
     }
 
     public void codeGen() {
+	Codegen.generateWithComment("","IdNode: " + myStrVal);
         if (mySym.isGlobal()) {
                 Codegen.generate("lw",Codegen.T0,"_"+myStrVal);
         }
@@ -1653,6 +1659,7 @@ class IdNode extends ExpNode {
     }
     
     public void genAddr() {
+	Codegen.generateWithComment("","IdNode address: " + myStrVal);
     	if (mySym.isGlobal()) {
 		Codegen.generate("la",Codegen.T0,"_"+myStrVal);
 	}
@@ -1664,6 +1671,7 @@ class IdNode extends ExpNode {
     }
 
     public void genJumpAndLink() {
+	Codegen.generateWithComment("","IdNode Jump and link: " + myStrVal);
     	if (this.isMain()) {
 		Codegen.generate("jal",myStrVal);
 	}
@@ -1793,6 +1801,7 @@ class IntLitNode extends ExpNode {
     }
     
     public void codeGen() {
+	Codegen.generateWithComment("","IntLitNode");
     	Codegen.generate("li",Codegen.T0,Integer.toString(myIntVal));
        	Codegen.genPush(Codegen.T0);	
     }
@@ -2035,19 +2044,11 @@ class AssignExpNode extends ExpNode {
     }
     
     public void codeGen() {
-    	myExp.codeGen();
-       	Type t;
+    	//Put expression on stack
+	myExp.codeGen();
 
-	//it's an ID
-	if (myLhs instanceof IdNode) {
-		((IdNode)myLhs).genAddr();
-		t = ((IdNode)myLhs).typeCheck();
-	}
-	//TODO it's a record
-	else {
-		((IdNode)myLhs).genAddr();
-		t = ((IdNode)myLhs).typeCheck();
-	}
+	//Push address on stack
+	((IdNode)myLhs).genAddr();
 
 	Codegen.genPop(Codegen.T0);  //the address
 	Codegen.genPop(Codegen.T1);  //the expression
@@ -2141,6 +2142,7 @@ class CallExpNode extends ExpNode {
     }
 
     public void codeGen() {
+	Codegen.generateWithComment("","CallExpNode");
    	myExpList.codeGen();
        	myId.genJumpAndLink();	
     	int f_size = myId.paramsSize();
@@ -2258,6 +2260,19 @@ abstract class BinaryExpNode extends ExpNode {
         myExp2 = exp2;
     }
     
+    /***
+     * Helper function to put the return of LHS expression into
+     * T0 and RHS into T1
+     ***/
+    public void codeGenRetrieve(){
+	//Put the return of the expressions on the stack
+	myExp1.codeGen();
+	myExp2.codeGen();
+	
+	//Put expr1 into T0 and expr1 into T1
+	Codegen.genPop(Codegen.T1);
+	Codegen.genPop(Codegen.T0);
+    }
     /***
      * Return the line number for this binary expression node. 
      * The line number is the one corresponding to the left operand.
@@ -2526,7 +2541,11 @@ class PlusNode extends ArithmeticExpNode {
     }
     
     public void codeGen() {
+	Codegen.generateWithComment("","PlusNode");
+	this.codeGenRetrieve();
 
+	Codegen.generate("add",Codegen.T0, Codegen.T0, Codegen.T1);
+	Codegen.genPush(Codegen.T0);
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -2544,7 +2563,12 @@ class MinusNode extends ArithmeticExpNode {
     }
     
     public void codeGen() {
+	Codegen.generateWithComment("","MinusNode");
+	this.codeGenRetrieve();
 
+	Codegen.generate("sub",Codegen.T0, Codegen.T0, Codegen.T1);
+	Codegen.genPush(Codegen.T0);
+	
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -2562,7 +2586,12 @@ class TimesNode extends ArithmeticExpNode {
     }
      
     public void codeGen() {
+	Codegen.generateWithComment("","TimesNode");
+	this.codeGenRetrieve();
 
+	Codegen.generate("mult", Codegen.T0, Codegen.T1);
+	Codegen.generate("mflo", Codegen.T0);
+	Codegen.genPush(Codegen.T0);
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -2580,7 +2609,12 @@ class DivideNode extends ArithmeticExpNode {
     }
     
     public void codeGen() {
+	Codegen.generateWithComment("","DivideNode");
+	this.codeGenRetrieve();
 
+	Codegen.generate("div", Codegen.T0, Codegen.T1);
+	Codegen.generate("mflo", Codegen.T0);
+	Codegen.genPush(Codegen.T0);
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -2598,7 +2632,6 @@ class EqualsNode extends EqualityExpNode {
     }
     
     public void codeGen() {
-
     }
 
     public void unparse(PrintWriter p, int indent) {
