@@ -1,0 +1,71 @@
+	.text		# FnDeclNode
+	.globl main
+main:		# Method Entry
+	sw    $ra, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 8
+	subu  $sp, $sp, 8
+			# PlusNode
+			# IntLitNode
+	li    $t0, 10
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# IntLitNode
+	li    $t0, 5
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	add   $t0, $t0, $t1
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# IdNode address: x
+	la    $t0, -8($fp)
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	lw    $t1, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	sw    $t1, 0($t0)
+	sw    $t1, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# MinusNode
+			# IntLitNode
+	li    $t0, 10
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# IntLitNode
+	li    $t0, 5
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	sub   $t0, $t0, $t1
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# IdNode address: y
+	la    $t0, -12($fp)
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	lw    $t1, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	sw    $t1, 0($t0)
+	sw    $t1, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# FUNCTION EXIT
+_main_Exit:
+	lw    $ra, 0($fp)
+	move  $t0, $fp
+	lw    $fp, -4($fp)
+	move  $sp, $t0
+	li    $v0, 10		# load exit code for syscall
+	syscall		# only do this for main
