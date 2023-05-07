@@ -998,7 +998,19 @@ class PostIncStmtNode extends StmtNode {
     }
     
     public void codeGen() {
-    
+	Codegen.generateWithComment("","PostIncStmtNode");
+	
+	//Push value on stack
+	myExp.codeGen();
+
+	//Push address on stack
+	((IdNode)myExp).genAddr();
+
+	Codegen.genPop(Codegen.T0);  //the address
+	Codegen.genPop(Codegen.T1);  //the expression
+	Codegen.generate("add", Codegen.T1, Codegen.T1, 1);
+	Codegen.generateIndexed("sw",Codegen.T1,Codegen.T0,0);
+	Codegen.genPush(Codegen.T1);
     }
 
     /***
@@ -1037,7 +1049,19 @@ class PostDecStmtNode extends StmtNode {
     }
     
     public void codeGen() {
+	Codegen.generateWithComment("","PostIncStmtNode");
+	
+	//Push value on stack
+	myExp.codeGen();
 
+	//Push address on stack
+	((IdNode)myExp).genAddr();
+
+	Codegen.genPop(Codegen.T0);  //the address
+	Codegen.genPop(Codegen.T1);  //the expression
+	Codegen.generate("sub", Codegen.T1, Codegen.T1, 1);
+	Codegen.generateIndexed("sw",Codegen.T1,Codegen.T0,0);
+	Codegen.genPush(Codegen.T1);
     }
 
     /***
@@ -2632,6 +2656,26 @@ class EqualsNode extends EqualityExpNode {
     }
     
     public void codeGen() {
+    	String labelEqual;
+	String labelEnd;
+	Codegen.generateWithComment("","EqualsNode");
+	this.codeGenRetrieve();
+	
+	//If they're equal set to 1
+	labelEqual = Codegen.nextLabel();
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("beq",Codegen.T0,Codegen.T1,labelEqual);
+	
+	//Not equal statment
+	Codegen.generate("li", Codegen.T0, Codegen.FALSE);
+	Codegen.generate("b", labelEnd);
+
+	//Equal statement
+	Codegen.genLabel(labelEqual);
+	Codegen.generate("li", Codegen.T0, Codegen.TRUE);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -2649,6 +2693,26 @@ class NotEqualsNode extends EqualityExpNode {
     }
     
     public void codeGen() {
+    	String labelEqual;
+	String labelEnd;
+	Codegen.generateWithComment("","NotEqualsNode");
+	this.codeGenRetrieve();
+	
+	//If they're equal set to 1
+	labelEqual = Codegen.nextLabel();
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("bne",Codegen.T0,Codegen.T1,labelEqual);
+	
+	//Not equal statment
+	Codegen.generate("li", Codegen.T0, Codegen.FALSE);
+	Codegen.generate("b", labelEnd);
+
+	//Equal statement
+	Codegen.genLabel(labelEqual);
+	Codegen.generate("li", Codegen.T0, Codegen.TRUE);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
 
     }
 
@@ -2667,6 +2731,26 @@ class LessNode extends RelationalExpNode {
     }
 
     public void codeGen() {
+    	String labelEqual;
+	String labelEnd;
+	Codegen.generateWithComment("","LessNode");
+	this.codeGenRetrieve();
+	
+	//If they're equal set to 1
+	labelEqual = Codegen.nextLabel();
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("blt",Codegen.T0,Codegen.T1,labelEqual);
+	
+	//Not equal statment
+	Codegen.generate("li", Codegen.T0, Codegen.FALSE);
+	Codegen.generate("b", labelEnd);
+
+	//Equal statement
+	Codegen.genLabel(labelEqual);
+	Codegen.generate("li", Codegen.T0, Codegen.TRUE);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
     
     }
 
@@ -2685,6 +2769,26 @@ class LessEqNode extends RelationalExpNode {
     }
     
     public void codeGen() {
+    	String labelEqual;
+	String labelEnd;
+	Codegen.generateWithComment("","LessEqNode");
+	this.codeGenRetrieve();
+	
+	//If they're equal set to 1
+	labelEqual = Codegen.nextLabel();
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("ble",Codegen.T0,Codegen.T1,labelEqual);
+	
+	//Not equal statment
+	Codegen.generate("li", Codegen.T0, Codegen.FALSE);
+	Codegen.generate("b", labelEnd);
+
+	//Equal statement
+	Codegen.genLabel(labelEqual);
+	Codegen.generate("li", Codegen.T0, Codegen.TRUE);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
 
     }
 
@@ -2703,6 +2807,26 @@ class GreaterNode extends RelationalExpNode {
     }
 
     public void codeGen() {
+    	String labelEqual;
+	String labelEnd;
+	Codegen.generateWithComment("","GreaterNode");
+	this.codeGenRetrieve();
+	
+	//If they're equal set to 1
+	labelEqual = Codegen.nextLabel();
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("bgt",Codegen.T0,Codegen.T1,labelEqual);
+	
+	//Not equal statment
+	Codegen.generate("li", Codegen.T0, Codegen.FALSE);
+	Codegen.generate("b", labelEnd);
+
+	//Equal statement
+	Codegen.genLabel(labelEqual);
+	Codegen.generate("li", Codegen.T0, Codegen.TRUE);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
     
     }
 
@@ -2721,6 +2845,26 @@ class GreaterEqNode extends RelationalExpNode {
     }
 
     public void codeGen() {
+    	String labelEqual;
+	String labelEnd;
+	Codegen.generateWithComment("","GreaterEqNode");
+	this.codeGenRetrieve();
+	
+	//If they're equal set to 1
+	labelEqual = Codegen.nextLabel();
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("bge",Codegen.T0,Codegen.T1,labelEqual);
+	
+	//Not equal statment
+	Codegen.generate("li", Codegen.T0, Codegen.FALSE);
+	Codegen.generate("b", labelEnd);
+
+	//Equal statement
+	Codegen.genLabel(labelEqual);
+	Codegen.generate("li", Codegen.T0, Codegen.TRUE);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
     
     }
 
