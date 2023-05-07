@@ -28,6 +28,235 @@ integer c(boolean arg1, integer x, integer arg3) {
 	x = 7;
 	return(x);
 }
+integer func1(){
+        return 1;
+}
+
+integer multiply(integer x, integer y){
+        return x * y;
+}
+
+integer changeParam2(integer x){
+        x = x + 2;
+        return x;
+}
+void arithmetic(){
+        integer x;
+        integer y;
+        print <- "x initial: ";
+        print <- x;
+        print <- "\n";
+        x = 10 + 5;
+        print <- "x = 10 + 5: ";
+        print <- x;
+        print <- "\n";
+
+        y = 10 - 5;
+        print <- "y = 10 - 5: ";
+        print <- y;
+        print <- "\n";
+
+        y = 3 * 2;
+        print <- "y = 3 * 2: ";
+        print <- y;
+        print <- "\n";
+
+        y = 10/5;
+        print <- "y = 10/5: ";
+        print <- y;
+        print <- "\n";
+
+        x = y + x;
+        print <- "x = y + x: ";
+        print <- x;
+        print <- "\n";
+
+        x = x * x;
+        print <- "x = x * x: ";
+        print <- x;
+        print <- "\n";
+
+        y = 10 / 3;
+        print <- "y = 10 / 3: ";
+        print <- y;
+        print <- "\n";
+
+        print <- "4 * 5 ";
+        print <- multiply(4,5);
+        print <- "\n";
+
+        x = multiply(4,5) + func1() * 2;
+        print <- "x = multiply(4,5) + func1() * 2 ";
+        print <- x;
+        print <- "\n";
+
+        x = changeParam2(x) - x;
+        print <- "x = changeParam2(x) - x: ";
+        print <- x;
+        print <- "\n";
+
+        x++;
+        print <- "x++: ";
+        print <- x;
+        print <- "\n";
+
+        x--;
+        print <- "x--: ";
+        print <- x;
+        print <- "\n";
+}
+void relational(){
+        boolean bool;
+        integer x;
+        integer y;
+        integer z;
+
+        bool = true;
+
+        print <- "bool == false: ";
+        print <- bool == false;
+        print <- "\n";
+
+        print <- "bool == true: ";
+        print <- bool == true;
+        print <- "\n";
+
+        x = 5;
+        y = 6;
+        z = 7;
+        print <- "x = 5";
+        print <- "\n";
+        print <- "y = 6";
+        print <- "\n";
+        print <- "z = 7";
+        print <- "\n";
+
+        print <- "x > y: ";
+        print <- x > y;
+        print <- "\n";
+
+        print <- "z > y: ";
+        print <- z > y;
+        print <- "\n";
+
+        print <- "x < y: ";
+        print <- x < y;
+        print <- "\n";
+
+        print <- "x <= x: ";
+        print <- x <= x;
+        print <- "\n";
+
+        print <- "x >= x:  ";
+        print <- x >= x;
+        print <- "\n";
+
+        print <- "1's only";
+        print <- "\n";
+	print <- 200 == 200;
+	print <- true == true;
+	print <- false == false;
+	print <- "abc" == "abc";
+	print <- true \= false;
+	print <- false \= true;
+	print <- "abc" \= "ABC";
+	print <- x \= z;
+        print <- 2 > 1;
+        print <- 1 < 2;
+        print <- 3 >= 3;
+        print <- 4 <= 4;
+        print <- 4 >= 3;
+        print <- 3 <= 3;
+        print <- "\n";
+
+        print <- "0's only";
+        print <- "\n";
+	print <- true == false;
+	print <- false == true;
+	print <- "a" == "A";
+	print <- 6 == 8;
+	print <- true \= true;
+	print <- false \= false;
+	print <- "abc" \= "abc";
+	print <- 6 \= 6;
+        print <- 2 < 1;
+        print <- 3 < 3;
+        print <- 1 > 2;
+        print <- 3 > 3;
+        print <- 3 >= 4;
+        print <- 4 <= 3;
+	print <- "\n";
+}
+void compare(){
+        print <- "1's only \n";
+        print <- true && true;
+        print <- true || true;
+        print <- true || false;
+        print <- false || true;
+        print <- (true && true) || false;
+        print <- (true || false) && true;
+        print <- "\n";
+
+        print <- "0's only \n";
+        print <- false && false;
+        print <- false && true;
+        print <- true && false;
+        print <- false && false;
+        print <- (false && true) || false;
+        print <- (false || true) && false;
+        print <- "\n";
+}
+void read(){
+        integer x;
+        integer y;
+        print <- "Enter a number: ";
+        scan -> x;
+
+        print <- "x: ";
+        print <- x;
+        print <- "\n";
+
+        x++;
+        print <- "x++";
+        print <- x;
+        print <- "\n";
+
+        print <- "\nEnter a second number: ";
+        scan -> y;
+
+        print <- "x + y: ";
+        print <- x + y;
+        print <- "\n";
+}
+void unaryOperators(){
+        integer x;
+        boolean y;
+        boolean z;
+
+        print <- "\n1's only: \n";
+        print <- \false;
+        print <- \(true && false);
+        print <- \(false && true);
+
+        print <- "\n0's only: \n";
+        print <- \true;
+        print <- \(false || true);
+        print <- \(true || false);
+
+        x = 0;
+        print <- -x;
+
+        x = 1000;
+        print <- "\nNegative: ";
+        print <- -x;
+
+        x = -x;
+        print <- "\nPositive: ";
+        print <- -x;
+        print <- "\n";
+
+}
+
 void main() {
 	boolean b;
 	integer z;
@@ -62,4 +291,10 @@ void main() {
 	x = 8;
 	print <- x;
 	print <- "\n";
+	
+	arithmetic();
+	relational();
+	compare();
+	read();
+	unaryOperators();
 }

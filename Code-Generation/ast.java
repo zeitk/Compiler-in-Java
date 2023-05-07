@@ -1345,7 +1345,17 @@ class ReadStmtNode extends StmtNode {
     }
 
     public void codeGen() {
-     
+	Codegen.generateWithComment("","READ");
+	Type t = myExp.typeCheck();
+        
+	//Save the entered value
+	Codegen.generate("li",Codegen.V0, 5);
+	Codegen.generate("syscall");
+
+	//Store the entered number into the ID
+	((IdNode)myExp).genAddr();
+	Codegen.genPop(Codegen.T0);
+	Codegen.generateIndexed("sw", Codegen.V0, Codegen.T0, 0);
     }
     
     /***
@@ -2338,7 +2348,17 @@ class UnaryMinusNode extends UnaryExpNode {
     }
     
     public void codeGen() {
+	Codegen.generateWithComment("","UnaryMinusNode");
 
+	//Grab current value
+	myExp.codeGen();
+	Codegen.genPop(Codegen.T0);
+	Codegen.generate("li", Codegen.T1, "-1");
+	
+	//Perform calculation and push to stack
+	Codegen.generate("mult", Codegen.T0, Codegen.T1);
+	Codegen.generate("mflo", Codegen.T0);
+	Codegen.genPush(Codegen.T0);
     }
 
     /***
@@ -2374,6 +2394,28 @@ class NotNode extends UnaryExpNode {
     }
 
     public void codeGen() {
+	String labelEnd;
+	String labelFalse;
+
+	Codegen.generateWithComment("","NotNode");
+	myExp.codeGen();
+	Codegen.genPop(Codegen.T0);
+
+	//If equal to false jump to false label
+	labelFalse = Codegen.nextLabel();
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("beq",Codegen.T0,Codegen.FALSE,labelFalse);
+	
+	//Not equal statment
+	Codegen.generate("li", Codegen.T0, Codegen.FALSE);
+	Codegen.generate("b", labelEnd);
+
+	//Equal statement
+	Codegen.genLabel(labelFalse);
+	Codegen.generate("li", Codegen.T0, Codegen.TRUE);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
     
     }
 
@@ -2883,7 +2925,22 @@ class AndNode extends LogicalExpNode {
     }
 
     public void codeGen() {
-    
+   	String labelEnd;
+
+	//Put expression 1 in T0
+	myExp1.codeGen();
+       	Codegen.genPop(Codegen.T0);
+	
+	//If they're equal set to 1
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("beq",Codegen.T0,Codegen.FALSE,labelEnd);
+	
+	//Second statment
+	myExp2.codeGen();
+       	Codegen.genPop(Codegen.T0);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
     }
     
     public void unparse(PrintWriter p, int indent) {
@@ -2901,7 +2958,22 @@ class OrNode extends LogicalExpNode {
     }
 
     public void codeGen() {
-    
+   	String labelEnd;
+
+	//Put expression 1 in T0
+	myExp1.codeGen();
+       	Codegen.genPop(Codegen.T0);
+	
+	//If they're equal set to 1
+	labelEnd = Codegen.nextLabel();
+	Codegen.generate("beq",Codegen.T0,Codegen.TRUE,labelEnd);
+	
+	//Second statment
+	myExp2.codeGen();
+       	Codegen.genPop(Codegen.T0);
+
+	Codegen.genLabel(labelEnd);
+	Codegen.genPush(Codegen.T0);
     }
     
     public void unparse(PrintWriter p, int indent) {
