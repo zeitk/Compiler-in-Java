@@ -1876,13 +1876,34 @@ class StringLitNode extends ExpNode {
         myCharNum = charNum;
         myStrVal = strVal;
     }
+
+    /***
+     * Static function to check for existing labels and 
+     * generate new ones for String literals
+     *
+     * Return: label address of string literal
+     ***/
+    public static String codeGenGetLabel(String stringLiteral){
+	String label = stringTable.get(stringLiteral);
+	
+	//If nothing for the key create a new key
+	if (label == null){
+		label = Codegen.nextLabel();
+		stringTable.put(stringLiteral,label);
+
+		Codegen.generate(".data");
+		Codegen.generateLabeled(label,".asciiz ","", stringLiteral);
+		Codegen.generate(".text");
+	}
+
+	return label;
+    }
     
     public void codeGen() {
-	String L = Codegen.nextLabel();
-	Codegen.generate(".data");
-	Codegen.generateLabeled(L,".asciiz ","", myStrVal);
-	Codegen.generate(".text");
-	Codegen.generate("la", Codegen.T0, L);
+	Codegen.generateWithComment("","StringLitNode");
+
+	String label = StringLitNode.codeGenGetLabel(myStrVal);
+	Codegen.generate("la", Codegen.T0, label);
 	Codegen.genPush(Codegen.T0);
     }
 
@@ -1914,6 +1935,7 @@ class StringLitNode extends ExpNode {
     private int myLineNum;
     private int myCharNum;
     private String myStrVal;
+    private static HashMap<String,String> stringTable = new HashMap<String,String>();
 }
 
 class DotAccessExpNode extends ExpNode {
