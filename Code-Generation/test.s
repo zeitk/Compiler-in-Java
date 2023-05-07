@@ -3248,6 +3248,111 @@ _unaryOperators_Exit:
 	move  $sp, $t0
 	jr    $ra
 	.text		# FnDeclNode
+_whileLoop:
+	sw    $ra, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	sw    $fp, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	addu  $fp, $sp, 8
+	subu  $sp, $sp, 4
+			# IntLitNode
+	li    $t0, 0
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# IdNode address: x
+	la    $t0, -8($fp)
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	lw    $t1, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	sw    $t1, 0($t0)
+	sw    $t1, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# WRITE
+			# StringLitNode
+	.data
+.L147:	.asciiz "\n While loop 1 through 5\n"
+	.text
+	la    $t0, .L147
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+			# WhileStmtNode
+.L148:
+			# LessNode
+			# IdNode: x
+	lw    $t0, -8($fp)
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# IntLitNode
+	li    $t0, 5
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t1, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	blt   $t0, $t1, .L150
+	li    $t0, 0
+	b     .L151
+.L150:
+	li    $t0, 1
+.L151:
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	beq   $t0, 0, .L149
+			# PostIncStmtNode
+			# IdNode: x
+	lw    $t0, -8($fp)
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# IdNode address: x
+	la    $t0, -8($fp)
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	lw    $t1, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	add   $t1, $t1, 1
+	sw    $t1, 0($t0)
+	sw    $t1, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+			# WRITE
+			# IdNode: x
+	lw    $t0, -8($fp)
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	li    $v0, 1
+	syscall
+			# WRITE
+			# StringLitNode
+	la    $t0, .L1
+	sw    $t0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $a0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+	li    $v0, 4
+	syscall
+	b     .L148
+.L149:
+			# FUNCTION EXIT
+_whileLoop_Exit:
+	lw    $ra, 0($fp)
+	move  $t0, $fp
+	lw    $fp, -4($fp)
+	move  $sp, $t0
+	jr    $ra
+	.text		# FnDeclNode
 	.globl main
 main:		# Method Entry
 	sw    $ra, 0($sp)	# PUSH
@@ -3323,13 +3428,13 @@ main:		# Method Entry
 	subu  $sp, $sp, 4
 	lw    $t0, 4($sp)	# POP
 	addu  $sp, $sp, 4
-	beq   $t0, 0, .L147
+	beq   $t0, 0, .L152
 			# WRITE
 			# StringLitNode
 	.data
-.L149:	.asciiz "True Main"
+.L154:	.asciiz "True Main"
 	.text
-	la    $t0, .L149
+	la    $t0, .L154
 	sw    $t0, 0($sp)	# PUSH
 	subu  $sp, $sp, 4
 	lw    $a0, 4($sp)	# POP
@@ -3345,14 +3450,14 @@ main:		# Method Entry
 	addu  $sp, $sp, 4
 	li    $v0, 4
 	syscall
-	b     .L148
-.L147:
+	b     .L153
+.L152:
 			# WRITE
 			# StringLitNode
 	.data
-.L150:	.asciiz "False Main"
+.L155:	.asciiz "False Main"
 	.text
-	la    $t0, .L150
+	la    $t0, .L155
 	sw    $t0, 0($sp)	# PUSH
 	subu  $sp, $sp, 4
 	lw    $a0, 4($sp)	# POP
@@ -3368,14 +3473,14 @@ main:		# Method Entry
 	addu  $sp, $sp, 4
 	li    $v0, 4
 	syscall
-.L148:
+.L153:
 			# IdNode: y
 	lw    $t0, _y
 	sw    $t0, 0($sp)	# PUSH
 	subu  $sp, $sp, 4
 	lw    $t0, 4($sp)	# POP
 	addu  $sp, $sp, 4
-	beq   $t0, 0, .L151		# Jump if T0 == 0 (false)
+	beq   $t0, 0, .L156		# Jump if T0 == 0 (false)
 			# WRITE
 			# IdNode: y
 	lw    $t0, _y
@@ -3394,7 +3499,7 @@ main:		# Method Entry
 	addu  $sp, $sp, 4
 	li    $v0, 4
 	syscall
-.L151:		# False label for if statement
+.L156:		# False label for if statement
 			# WRITE
 			# IdNode: x
 	lw    $t0, _x
@@ -3459,9 +3564,9 @@ main:		# Method Entry
 			# WRITE
 			# StringLitNode
 	.data
-.L152:	.asciiz "Back to main. The next line should be a 0"
+.L157:	.asciiz "Back to main. The next line should be a 0"
 	.text
-	la    $t0, .L152
+	la    $t0, .L157
 	sw    $t0, 0($sp)	# PUSH
 	subu  $sp, $sp, 4
 	lw    $a0, 4($sp)	# POP
@@ -3610,6 +3715,14 @@ main:		# Method Entry
 			# CallExpNode
 			# IdNode Jump and link: unaryOperators
 	jal   _unaryOperators
+	subu  $sp, $sp, 0
+	sw    $v0, 0($sp)	# PUSH
+	subu  $sp, $sp, 4
+	lw    $t0, 4($sp)	# POP
+	addu  $sp, $sp, 4
+			# CallExpNode
+			# IdNode Jump and link: whileLoop
+	jal   _whileLoop
 	subu  $sp, $sp, 0
 	sw    $v0, 0($sp)	# PUSH
 	subu  $sp, $sp, 4
